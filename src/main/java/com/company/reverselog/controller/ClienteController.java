@@ -50,4 +50,16 @@ public class ClienteController {
         return ResponseEntity.ok(new CustomerDetailData(custumer));
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteCustumer(@PathVariable Long id){
+        var custumer = repository.getReferenceById(id);
+
+        custumer.deleteCustumer();
+
+        return ResponseEntity.noContent().build();
+
+    }
+
+
 }

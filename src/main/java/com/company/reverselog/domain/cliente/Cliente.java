@@ -59,4 +59,8 @@ public class Cliente {
             this.ativo = data.ativo();
         }
     }
+
+    public void deleteCustumer() {
+        this.ativo = false;
+    }
 }
