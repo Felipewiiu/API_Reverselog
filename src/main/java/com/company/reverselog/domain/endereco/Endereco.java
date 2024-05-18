@@ -32,26 +32,26 @@ public class Endereco {
     }
 
 
-    public void updateAdrress(Endereco endereco) {
-        if(this.logradouro != null) {
+     public void updateAddress(Endereco endereco) {
+        if (endereco.getLogradouro() != null) {
             this.logradouro = endereco.getLogradouro();
         }
-        if(this.bairro != null) {
+        if (endereco.getBairro() != null) {
             this.bairro = endereco.getBairro();
         }
-        if(this.cep != null) {
+        if (endereco.getCep() != null) {
             this.cep = endereco.getCep();
         }
-        if(this.numero != null) {
+        if (endereco.getNumero() != null) {
             this.numero = endereco.getNumero();
         }
-        if(this.complemento != null) {
+        if (endereco.getComplemento() != null) {
             this.complemento = endereco.getComplemento();
         }
-        if(this.cidade != null) {
+        if (endereco.getCidade() != null) {
             this.cidade = endereco.getCidade();
         }
-        if(this.uf != null) {
+        if (endereco.getUf() != null) {
             this.uf = endereco.getUf();
         }
     }

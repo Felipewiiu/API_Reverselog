@@ -53,7 +53,7 @@ public class Cliente {
             this.cnpj = data.cnpj();
         }
         if(data.endereco() != null){
-            this.endereco.updateAdrress(data.endereco());
+            this.endereco.updateAddress(data.endereco());
         }
         if(data.ativo() != null){
             this.ativo = data.ativo();
