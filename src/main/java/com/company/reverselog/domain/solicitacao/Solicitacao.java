@@ -21,22 +21,26 @@ public class Solicitacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nf_compra;
 
-    //mappedBy informa qual variável usamos para representar a classe pai na classe filha
-    // Solicitação é atributo da classe produto
     @OneToMany(mappedBy = "solicitacao", cascade = CascadeType.ALL)
     private List<Produto> produto;
 
     private String descricao_defeito;
+
     private LocalDateTime data;
-    private Boolean ativo;
+
+    private Boolean ativo = true;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id")//FK chave estrangeira
+    @JoinColumn(name = "cliente_id")
+
     private Cliente cliente;
+
+
 
 }

@@ -17,14 +17,20 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
     private String modelo;
+
     private Integer numero_de_serie;
+
     private Integer ncm;
+
     private Boolean ativo = true;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "solicitacao_id")//FK chave estrangeira
-    private Solicitacao solicitacao;// solicitação é o pai da classe produto
+    @JoinColumn(name = "solicitacao_id")
+    private Solicitacao solicitacao;
 
     public Produto(DadosCadastroProdutos dados) {
         this.nome = dados.nome();
@@ -33,6 +39,7 @@ public class Produto {
         this.ncm = dados.ncm();
         this.ativo = true;
     }
+
 
     public void atualizaInformacoesProduto(DadosAtualizacaoProduto produto) {
         if(produto.nome() != null){
