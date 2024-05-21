@@ -3,6 +3,7 @@ package com.company.reverselog.controller;
 import com.company.reverselog.domain.solicitacao.RequestRegistrationData;
 import com.company.reverselog.domain.solicitacao.Solicitacao;
 import com.company.reverselog.domain.solicitacao.SolicitacaoRepository;
+import com.company.reverselog.service.ToMakeRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class SolicitacaoController {
 
     @Autowired
-    private SolicitacaoRepository repository;
+    private ToMakeRequest request;
 
     @GetMapping
     public ResponseEntity<Page<RequestRegistrationData>> findAll(Pageable pageable) {
