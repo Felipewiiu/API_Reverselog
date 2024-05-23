@@ -1,6 +1,7 @@
 package com.company.reverselog.domain.produto;
 
 import com.company.reverselog.domain.solicitacao.Solicitacao;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

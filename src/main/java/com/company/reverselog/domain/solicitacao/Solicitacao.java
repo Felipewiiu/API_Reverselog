@@ -2,10 +2,13 @@ package com.company.reverselog.domain.solicitacao;
 
 import com.company.reverselog.domain.cliente.Cliente;
 import com.company.reverselog.domain.produto.Produto;
+import com.google.gson.annotations.SerializedName;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serial;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -49,7 +52,13 @@ public class Solicitacao {
         this.cliente = requestRegistrationData.cliente();
     }
 
-    public Solicitacao(String s, Set<Produto> products, String s1, LocalDateTime data, Status status, Cliente cliente) {
+    public Solicitacao(SolicitacaoDto requestDto) {
+        this.nf_compra = requestDto.nf_compra();
+        this.produto = requestDto.produto_list();
+        this.descricao_defeito = requestDto.descricao_defeito();
+        this.data = requestDto.data();
+        this.status = requestDto.status();
+        this.cliente = requestDto.cliente();
     }
 
 

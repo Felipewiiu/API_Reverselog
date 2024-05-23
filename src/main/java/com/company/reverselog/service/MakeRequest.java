@@ -1,8 +1,6 @@
 package com.company.reverselog.service;
 
 import com.company.reverselog.domain.cliente.ClienteRepository;
-import com.company.reverselog.domain.produto.DadosCadastroProdutos;
-import com.company.reverselog.domain.produto.DadosDetalhamentoProduto;
 import com.company.reverselog.domain.produto.Produto;
 import com.company.reverselog.domain.produto.ProdutoRepository;
 import com.company.reverselog.domain.solicitacao.RequestDetailData;
@@ -15,10 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class MakeRequest {
     @Autowired
     private ProdutoRepository productRepository;
@@ -29,28 +26,33 @@ public class MakeRequest {
     @Autowired
     private SolicitacaoRepository solicitacaoRepository;
 
-    @Transactional
-    public  RequestDetailData Request(RequestRegistrationData data) {
-        Set<Produto> products = new HashSet<>();
 
-        for ( Long products_id : data.produto_id()){
+    public RequestDetailData Request(RequestRegistrationData data) {
+        Set<Produto> products = new HashSet<>();
+        var cliente = clienteRepository.getReferenceById(data.cliente_id());
+
+        for (Long products_id : data.produto_id()) {
             var productUnit = productRepository.getReferenceById(products_id);
             products.add(productUnit);
+
         }
 
 
-        var cliente = clienteRepository.getReferenceById(data.cliente_id());// retorna um optional
-
-       Solicitacao solicitacao = new Solicitacao(data.nf_compra(), products, data.descricao_defeito(), data.data(), data.status(), cliente);
 
 
-       solicitacaoRepository.save(solicitacao);
+        Solicitacao solicitacao = new Solicitacao();
+        solicitacao.setNf_compra(data.nf_compra());
+        solicitacao.setProduto(products);
+        solicitacao.setDescricao_defeito(data.descricao_defeito());
+        solicitacao.setData(data.data());
+        solicitacao.setStatus(data.status());
+        solicitacao.setCliente(cliente);
 
-       return new RequestDetailData(solicitacao);
+
+        solicitacaoRepository.save(solicitacao);
+
+        return new RequestDetailData(solicitacao);
 
     }
-
-
-
 
 }
