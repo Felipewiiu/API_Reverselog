@@ -29,16 +29,12 @@ public class MakeRequest {
 
     public RequestDetailData Request(RequestRegistrationData data) {
         Set<Produto> products = new HashSet<>();
+
+       data.produto_id().stream().forEach(p -> products.add(productRepository.getReferenceById(p)));
+
         var cliente = clienteRepository.getReferenceById(data.cliente_id());
 
-        for (Long products_id : data.produto_id()) {
-            var productUnit = productRepository.getReferenceById(products_id);
-            products.add(productUnit);
-
-        }
-
-
-
+        System.out.println(products);
 
         Solicitacao solicitacao = new Solicitacao();
         solicitacao.setNf_compra(data.nf_compra());
