@@ -6,10 +6,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public record RequestRegistrationData(
         String nf_compra,
-        Long produto_id,
+        Set<Long> produto_id,
         String descricao_defeito,
 
         @JsonFormat(pattern = "dd/MM/yyyy HH:mm")

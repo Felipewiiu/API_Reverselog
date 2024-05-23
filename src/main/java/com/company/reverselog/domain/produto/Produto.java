@@ -2,14 +2,13 @@ package com.company.reverselog.domain.produto;
 
 import com.company.reverselog.domain.solicitacao.Solicitacao;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Table(name = "produtos")
 @Entity(name = "Produto")
 @Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")

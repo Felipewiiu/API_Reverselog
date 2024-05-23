@@ -6,3 +6,4 @@ public enum Status {
     EM_TRANSITO_EM_MANUTENCO,
     RETORNANDO_AO_CLIENTE,
 }
+
