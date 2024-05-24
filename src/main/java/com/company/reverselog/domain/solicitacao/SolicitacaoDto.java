@@ -8,16 +8,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-public record RequestRegistrationData(
+public record SolicitacaoDto(
         String nf_compra,
-        List<Long> produto_id,
+        List<Produto> produto_list,
         String descricao_defeito,
-
-        @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-        LocalDateTime data,
-
         Status status,
-        Long cliente_id
-) {
-
+        Cliente cliente) {
 }

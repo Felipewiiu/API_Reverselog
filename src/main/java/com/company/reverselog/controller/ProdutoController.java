@@ -22,11 +22,7 @@ public class ProdutoController {
     @GetMapping
     public ResponseEntity<Page<DadosListagemProdutosAtivos>> listaProdutosAtivos(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
         var page = repository.findAllByAtivoTrue(pageable).map(DadosListagemProdutosAtivos::new);
-// Apagar esse código*******************************
 
-        var produtos = repository.getReferenceById(1L);
-
-        System.out.println("esse " + produtos);
 
         return ResponseEntity.ok(page);
     }

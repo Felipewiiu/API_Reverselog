@@ -18,21 +18,21 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/solicitacao")
 public class SolicitacaoController {
     @Autowired
-   private MakeRequest makeRequest;
+    private MakeRequest makeRequest;
 
 
     @GetMapping
     public ResponseEntity<Page<RequestRegistrationData>> findAll(Pageable pageable) {
-       return  ResponseEntity.ok().build();
-       // precica criar a lógica de solicitações
+        return ResponseEntity.ok().build();
+        // precica criar a lógica de solicitações
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity registrationRequest(@RequestBody RequestRegistrationData request, UriComponentsBuilder uriBuilder){
+    public ResponseEntity registrationRequest(@RequestBody RequestRegistrationData request, UriComponentsBuilder uriBuilder) {
         var dto = makeRequest.Request(request);
 
-        return  ResponseEntity.ok(dto);
+        return ResponseEntity.ok(dto);
     }
 
 }
