@@ -10,7 +10,7 @@ import java.util.Set;
 
 public record RequestRegistrationData(
         String nf_compra,
-        Set<Long> produto_id,
+        List<Long> produto_id,
         String descricao_defeito,
 
         @JsonFormat(pattern = "dd/MM/yyyy HH:mm")

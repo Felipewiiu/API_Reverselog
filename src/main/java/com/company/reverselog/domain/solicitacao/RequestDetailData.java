@@ -12,7 +12,7 @@ public record RequestDetailData(
 
         String nf_compra,
 
-        Set<Produto> produtos_id,
+        List<Produto> produtos_id,
         @NotNull
         String descricao_defeito,
 

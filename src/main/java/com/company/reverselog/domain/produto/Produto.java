@@ -1,6 +1,7 @@
 package com.company.reverselog.domain.produto;
 
 import com.company.reverselog.domain.solicitacao.Solicitacao;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -31,6 +32,7 @@ public class Produto {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "solicitacao_id")
+    @JsonIgnore
     private Solicitacao solicitacao;
 
     public Produto(DadosCadastroProdutos dados) {

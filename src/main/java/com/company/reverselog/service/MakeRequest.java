@@ -3,15 +3,14 @@ package com.company.reverselog.service;
 import com.company.reverselog.domain.cliente.ClienteRepository;
 import com.company.reverselog.domain.produto.Produto;
 import com.company.reverselog.domain.produto.ProdutoRepository;
-import com.company.reverselog.domain.solicitacao.RequestDetailData;
-import com.company.reverselog.domain.solicitacao.RequestRegistrationData;
-import com.company.reverselog.domain.solicitacao.Solicitacao;
-import com.company.reverselog.domain.solicitacao.SolicitacaoRepository;
+import com.company.reverselog.domain.solicitacao.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -28,22 +27,17 @@ public class MakeRequest {
 
 
     public RequestDetailData Request(RequestRegistrationData data) {
-        Set<Produto> products = new HashSet<>();
+        List<Produto> products = new ArrayList<>();
 
-       data.produto_id().stream().forEach(p -> products.add(productRepository.getReferenceById(p)));
+       productRepository.findAllById(data.produto_id())
+               .stream()
+               .forEach(p -> products.add(p));
 
         var cliente = clienteRepository.getReferenceById(data.cliente_id());
 
         System.out.println(products);
 
-        Solicitacao solicitacao = new Solicitacao();
-        solicitacao.setNf_compra(data.nf_compra());
-        solicitacao.setProduto(products);
-        solicitacao.setDescricao_defeito(data.descricao_defeito());
-        solicitacao.setData(data.data());
-        solicitacao.setStatus(data.status());
-        solicitacao.setCliente(cliente);
-
+        Solicitacao solicitacao = new Solicitacao(data.nf_compra(),products, data.descricao_defeito(),cliente);
 
         solicitacaoRepository.save(solicitacao);
 
