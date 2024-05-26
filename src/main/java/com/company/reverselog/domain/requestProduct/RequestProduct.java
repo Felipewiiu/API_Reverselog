@@ -1,0 +1,43 @@
+package com.company.reverselog.domain.requestProduct;
+
+import com.company.reverselog.domain.produto.Produto;
+import com.company.reverselog.domain.solicitacao.Solicitacao;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity(name = "RequestProduct")
+@Table(name = "tb_solicitacao_produto")
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@AllArgsConstructor
+@EqualsAndHashCode(of = "{id}")
+public class RequestProduct {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_requestProducts;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_solicitacao_PK")
+    private Solicitacao solicitacao;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_produto_PK")
+    private Produto produto;
+
+    private Integer quantidade;
+
+
+    public RequestProduct(RequestProductDto requestProductDto) {
+        
+    }
+
+
+    public RequestProduct(Solicitacao solicitacao, Produto product, int quantidade) {
+        this.solicitacao = solicitacao;
+        this.produto = product;
+        this.quantidade = quantidade;
+    }
+}

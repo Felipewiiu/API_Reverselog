@@ -3,6 +3,8 @@ package com.company.reverselog.service;
 import com.company.reverselog.domain.cliente.ClienteRepository;
 import com.company.reverselog.domain.produto.Produto;
 import com.company.reverselog.domain.produto.ProdutoRepository;
+import com.company.reverselog.domain.requestProduct.RequestProduct;
+import com.company.reverselog.domain.requestProduct.RequestProductsRepository;
 import com.company.reverselog.domain.solicitacao.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -25,19 +28,25 @@ public class MakeRequest {
     @Autowired
     private SolicitacaoRepository solicitacaoRepository;
 
+    @Autowired
+    private RequestProductsRepository requestProductsRepository;
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
 
     public RequestDetailData Request(RequestRegistrationData data) {
-        List<Produto> products = new ArrayList<>();
+        Solicitacao solicitacao = new Solicitacao();
 
-       productRepository.findAllById(data.produto_id())
-               .stream()
-               .forEach(p -> products.add(p));
+        data.produto().stream().forEach(product -> {
 
-        var cliente = clienteRepository.getReferenceById(data.cliente_id());
+            var productTarget = productRepository.getReferenceById(product.id_produto());
 
-        System.out.println(products);
+            RequestProduct requestProductList = new RequestProduct(solicitacao, productTarget, product.quantidade());
 
-        Solicitacao solicitacao = new Solicitacao(data.nf_compra(),products, data.descricao_defeito(),cliente);
+            requestProductsRepository.save(requestProductList);
+
+        });
+
 
         solicitacaoRepository.save(solicitacao);
 

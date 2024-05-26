@@ -10,14 +10,15 @@ import java.util.Set;
 
 public record RequestRegistrationData(
         String nf_compra,
-        List<Long> produto_id,
+        List<QuantityProducts> produto,
         String descricao_defeito,
 
         @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
         LocalDateTime data,
 
         Status status,
-        Long cliente_id
+        Long cliente_id,
+        Integer quantidade
 ) {
 
 }

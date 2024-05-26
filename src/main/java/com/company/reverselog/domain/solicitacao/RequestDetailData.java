@@ -12,7 +12,6 @@ public record RequestDetailData(
 
         String nf_compra,
 
-        List<Produto> produtos_id,
         @NotNull
         String descricao_defeito,
 
@@ -27,7 +26,6 @@ public record RequestDetailData(
         this(
 
                 request.getNf_compra(),
-                request.getProduto(),
                 request.getDescricao_defeito(),
                 request.getData(),
                 request.getStatus(),

@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "clientes")
@@ -25,7 +26,7 @@ public class Cliente {
     private String cpf;
     private String cnpj;
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Solicitacao> solicitacoes;
+    private List<Solicitacao> solicitacoes = new ArrayList<>();
 
     @Embedded
     private Endereco endereco;
