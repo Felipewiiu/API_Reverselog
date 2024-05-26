@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/solicitacao")
 public class SolicitacaoController {
     @Autowired
-    private MakeRequest makeRequest;
+    private MakeRequest makeRequestService;
 
 
     @GetMapping
@@ -30,7 +30,7 @@ public class SolicitacaoController {
     @PostMapping
     @Transactional
     public ResponseEntity registrationRequest(@RequestBody RequestRegistrationData request, UriComponentsBuilder uriBuilder) {
-        var dto = makeRequest.Request(request);
+        var dto = makeRequestService.Request(request);
 
         return ResponseEntity.ok(dto);
     }
