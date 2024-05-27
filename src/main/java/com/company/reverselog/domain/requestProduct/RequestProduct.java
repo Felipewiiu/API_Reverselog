@@ -2,6 +2,8 @@ package com.company.reverselog.domain.requestProduct;
 
 import com.company.reverselog.domain.produto.Produto;
 import com.company.reverselog.domain.solicitacao.Solicitacao;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +21,7 @@ public class RequestProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_requestProducts;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_solicitacao_PK")
     private Solicitacao solicitacao;
