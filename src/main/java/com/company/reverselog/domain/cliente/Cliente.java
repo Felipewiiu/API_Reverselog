@@ -2,6 +2,7 @@ package com.company.reverselog.domain.cliente;
 
 import com.company.reverselog.domain.endereco.Endereco;
 import com.company.reverselog.domain.solicitacao.Solicitacao;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -21,10 +22,15 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String email;
+
     private String telefone;
+
     private String cpf;
+
     private String cnpj;
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Solicitacao> solicitacoes = new ArrayList<>();
 

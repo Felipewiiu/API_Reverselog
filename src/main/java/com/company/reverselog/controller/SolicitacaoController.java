@@ -1,5 +1,6 @@
 package com.company.reverselog.controller;
 
+import com.company.reverselog.domain.cliente.Cliente;
 import com.company.reverselog.domain.solicitacao.RequestRegistrationData;
 import com.company.reverselog.domain.solicitacao.Solicitacao;
 import com.company.reverselog.domain.solicitacao.SolicitacaoRepository;
@@ -30,9 +31,10 @@ public class SolicitacaoController {
     @PostMapping
     @Transactional
     public ResponseEntity registrationRequest(@RequestBody RequestRegistrationData request, UriComponentsBuilder uriBuilder) {
-        var dto = makeRequestService.Request(request);
+        var dto = makeRequestService.request(request);
 
-        return ResponseEntity.ok(dto);
+        var uri = uriBuilder.path("/solicitacao/{id}").buildAndExpand(dto.cliente().getId()).toUri();
+        return ResponseEntity.created(uri).body(dto);
     }
 
 }

@@ -1,12 +1,9 @@
 package com.company.reverselog.domain.solicitacao;
 
 import com.company.reverselog.domain.cliente.Cliente;
-import com.company.reverselog.domain.produto.Produto;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
 
 public record RequestDetailData(
 
@@ -22,7 +19,7 @@ public record RequestDetailData(
         Cliente cliente
 
 ) {
-    public RequestDetailData(Solicitacao request){
+    public RequestDetailData(Solicitacao request) {
         this(
 
                 request.getNf_compra(),
