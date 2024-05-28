@@ -34,7 +34,7 @@ public class Produto {
 
     private Boolean ativo = true;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<RequestProduct> requestProduct = new ArrayList<>();
 
