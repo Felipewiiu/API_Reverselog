@@ -5,12 +5,14 @@ import com.company.reverselog.domain.solicitacao.RequestRegistrationData;
 import com.company.reverselog.domain.solicitacao.Solicitacao;
 import com.company.reverselog.domain.solicitacao.SolicitacaoRepository;
 
+import com.company.reverselog.dto.DataListRequestDto;
 import com.company.reverselog.service.MakeRequest;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,9 +25,11 @@ public class SolicitacaoController {
 
 
     @GetMapping
-    public ResponseEntity<Page<RequestRegistrationData>> findAll(Pageable pageable) {
-        return ResponseEntity.ok().build();
-        // precica criar a lógica de solicitações
+    public ResponseEntity<Page<DataListRequestDto>> findAllRequests(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
+        Page<DataListRequestDto> dataListRequestDto = makeRequestService.findAllRequest(pageable);
+
+        return ResponseEntity.ok(dataListRequestDto);
+
     }
 
     @PostMapping

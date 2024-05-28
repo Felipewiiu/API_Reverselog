@@ -11,6 +11,4 @@ public record RequestRegistrationData(
         Integer quantidade
 ) {
 
-
-
 }
