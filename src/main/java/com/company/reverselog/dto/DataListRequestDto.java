@@ -1,6 +1,6 @@
 package com.company.reverselog.dto;
 
-import com.company.reverselog.domain.cliente.Cliente;
+import com.company.reverselog.domain.cliente.entity.Cliente;
 import com.company.reverselog.domain.solicitacao.Status;
 
 import java.time.LocalDateTime;
