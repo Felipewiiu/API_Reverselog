@@ -32,7 +32,7 @@ public class SolicitacaoController {
     @PostMapping
     @Transactional
     public ResponseEntity registrationRequest(@RequestBody RequestRegistrationData request, UriComponentsBuilder uriBuilder) {
-        var dto = makeRequestService.request(request);
+        var dto = makeRequestService.saveRequest(request);
 
         var uri = uriBuilder.path("/solicitacao/{id}").buildAndExpand(dto.cliente().getId()).toUri();
         return ResponseEntity.created(uri).body(dto);

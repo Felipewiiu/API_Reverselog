@@ -3,9 +3,11 @@ package com.company.reverselog.domain.cliente.controller;
 import com.company.reverselog.controller.exception.ControllerNotFoundExeption;
 import com.company.reverselog.domain.cliente.dto.CustomerDetailData;
 import com.company.reverselog.domain.cliente.dto.CustomerRegistrationData;
+import com.company.reverselog.domain.cliente.dto.CustumerDTO;
 import com.company.reverselog.domain.cliente.dto.DadosListagemClientes;
 import com.company.reverselog.domain.cliente.entity.Cliente;
 import com.company.reverselog.domain.cliente.repository.ClienteRepository;
+import com.company.reverselog.domain.cliente.service.ClienteService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,50 +22,50 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
+
     @Autowired
-    private ClienteRepository repository;
+    private ClienteService clienteService;
+
     @GetMapping("/ativo")
     public ResponseEntity<Page<DadosListagemClientes>> listCostumerActive(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable){
-        var costumer = repository.findAllByAtivoTrue(pageable).map(DadosListagemClientes::new);
-        return  ResponseEntity.ok(costumer);
+        Page<DadosListagemClientes> dadosListagemClientes = clienteService.fildAllActive(pageable);
+
+        return  ResponseEntity.ok(dadosListagemClientes);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Page<DadosListagemClientes>> listAllcCostumers(@PageableDefault(size = 5,sort = {"id"}) Pageable pageable){
-        var costumers = repository.findAll(pageable).map(DadosListagemClientes::new);
-        return ResponseEntity.ok(costumers);
+    public ResponseEntity<Page<DadosListagemClientes>> listAllCostumers(@PageableDefault(size = 5,sort = {"id"}) Pageable pageable){
+        Page<DadosListagemClientes> dadosListagemClientes = clienteService.findAllCustumer(pageable);
+
+        return ResponseEntity.ok(dadosListagemClientes);
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity registerCustomer(@RequestBody @Valid CustomerRegistrationData data, UriComponentsBuilder builder){
-        var costumer = new Cliente(data);
-        repository.save(costumer);
+    public ResponseEntity<CustumerDTO> registerCustomer(@RequestBody @Valid CustumerDTO data, UriComponentsBuilder builder){
+        CustumerDTO custumer = clienteService.saveCustumer(data);
 
-        var uri = builder.path("/clientes/{id}").buildAndExpand(costumer.getId()).toUri();
-        return ResponseEntity.created(uri).body(new CustomerDetailData(costumer));
+        System.out.println(custumer);
+
+        var uri = builder.path("/clientes/{id}").buildAndExpand(custumer.id()).toUri();
+
+        return ResponseEntity.created(uri).body(custumer);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity updateCustumer(@RequestBody @Valid CustomerDetailData data){
-        var custumer = repository.findById(data.id())
-                .orElseThrow(() -> new ConcurrencyFailureException("Cliente não está cadastrado na base de dados"));
+    public ResponseEntity<CustomerDetailData> updateCustumer(@PathVariable Long id, @RequestBody @Valid CustomerDetailData data){
+       CustomerDetailData custumer = clienteService.updateCustumer(id, data);
 
-        custumer.updateCustumerData(data);
-        return ResponseEntity.ok(new CustomerDetailData(custumer));
+        return ResponseEntity.ok(custumer);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity deleteCustumer(@PathVariable Long id){
-        var custumer = repository.findById(id)
-                .orElseThrow(() -> new ControllerNotFoundExeption("Cliente não está cadastrado na base de dados"));
-
-        custumer.deleteCustumer();
+    public ResponseEntity<Void> deleteCustumer(@PathVariable Long id){
+        clienteService.deleteCustumer(id);
 
         return ResponseEntity.noContent().build();
-
     }
 
 

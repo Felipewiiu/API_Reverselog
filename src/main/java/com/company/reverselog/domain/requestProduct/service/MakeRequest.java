@@ -37,7 +37,7 @@ public class MakeRequest {
     }
 
 
-    public RequestDetailData request(RequestRegistrationData data) {
+    public RequestDetailData saveRequest(RequestRegistrationData data) {
         Solicitacao solicitacao = new Solicitacao();
 
         Cliente custumer = clienteRepository.findById(data.cliente_id())

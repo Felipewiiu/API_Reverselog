@@ -7,7 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-public record CustomerRegistrationData(
+public record CustumerDTO(
+        Long id,
         @NotBlank(message = "O campo email não pode estar vazio")
         @Email
         String email,
@@ -20,8 +21,6 @@ public record CustomerRegistrationData(
         @Pattern(regexp = "\\d{14}", message = "O campo CNPJ precisa possuir 14 dígitos")
         String cnpj,
 
-        AddressData endereco
-
+        Endereco endereco
 ) {
-
 }
