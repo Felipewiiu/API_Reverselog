@@ -1,7 +1,6 @@
 package com.company.reverselog.domain.cliente.dto;
 
 import com.company.reverselog.domain.endereco.dto.AddressData;
-import com.company.reverselog.domain.endereco.entity.Endereco;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
