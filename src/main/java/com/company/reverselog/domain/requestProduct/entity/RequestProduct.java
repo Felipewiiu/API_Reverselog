@@ -32,12 +32,6 @@ public class RequestProduct {
 
     private Integer quantidade;
 
-
-    public RequestProduct(RequestProductDto requestProductDto) {
-        
-    }
-
-
     public RequestProduct(Solicitacao solicitacao, Produto product, int quantidade) {
         this.solicitacao = solicitacao;
         this.produto = product;

@@ -23,7 +23,6 @@ public record RequestDetailData(
 ) {
     public RequestDetailData(Solicitacao request) {
         this(
-
                 request.getNf_compra(),
                 request.getDescricao_defeito(),
                 request.getData(),
