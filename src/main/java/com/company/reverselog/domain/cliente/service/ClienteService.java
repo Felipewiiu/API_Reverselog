@@ -40,7 +40,7 @@ public class ClienteService {
     }
 
     public CustomerDetailData updateCustumer(Long id,CustomerDetailData data){
-        var custumer = repository.findById(id)
+        Cliente custumer = repository.findById(id)
                 .orElseThrow(() -> new ConcurrencyFailureException("Cliente não está cadastrado na base de dados"));
 
         custumer.updateCustumerData(data);
@@ -75,7 +75,13 @@ public class ClienteService {
                 cliente.getTelefone(),
                 cliente.getCpf(),
                 cliente.getCnpj(),
-                cliente.getEndereco()
+                cliente.getEndereco().getLogradouro(),
+                cliente.getEndereco().getBairro(),
+                cliente.getEndereco().getCep(),
+                cliente.getEndereco().getNumero(),
+                cliente.getEndereco().getComplemento(),
+                cliente.getEndereco().getCidade(),
+                cliente.getEndereco().getUf()
         );
     }
 }

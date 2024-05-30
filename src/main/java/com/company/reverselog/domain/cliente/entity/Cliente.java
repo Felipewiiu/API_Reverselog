@@ -54,7 +54,16 @@ public class Cliente {
         this.telefone = data.telefone();
         this.cpf = data.cpf();
         this.cnpj = data.cnpj();
-        this.endereco = data.endereco();
+        this.endereco = new Endereco(
+                data.logradouro(),
+                data.bairro(),
+                data.cep(),
+                data.numero(),
+                data.complemento(),
+                data.cidade(),
+                data.uf()
+                );
+
     }
 
 
