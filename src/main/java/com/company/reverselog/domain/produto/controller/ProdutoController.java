@@ -3,6 +3,7 @@ package com.company.reverselog.domain.produto.controller;
 import com.company.reverselog.domain.produto.dto.*;
 import com.company.reverselog.domain.produto.entity.Produto;
 import com.company.reverselog.domain.produto.repository.ProdutoRepository;
+import com.company.reverselog.domain.produto.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,39 +20,39 @@ public class ProdutoController {
     @Autowired
     private ProdutoRepository repository;
 
+    @Autowired
+    private ProductService productService;
+
     @GetMapping
     public ResponseEntity<Page<DadosListagemProdutosAtivos>> listaProdutosAtivos(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
-        var page = repository.findAllByAtivoTrue(pageable).map(DadosListagemProdutosAtivos::new);
+        Page<DadosListagemProdutosAtivos> products = productService.findAllProductsActive(pageable);
 
-
-        return ResponseEntity.ok(page);
+        return ResponseEntity.ok(products);
     }
 
     @GetMapping("/all")
     public ResponseEntity<Page<DadosListagemProdutos>> listaTodosProdutos(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
-        var page = repository.findAll(pageable).map(DadosListagemProdutos::new);
-        return ResponseEntity.ok(page);
+        Page<DadosListagemProdutos> pageProduct = productService.findAll(pageable);
+
+        return ResponseEntity.ok(pageProduct);
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastraProdutos(@RequestBody @Valid DadosCadastroProdutos dados, UriComponentsBuilder builder) {
-        var produto = new Produto(dados);
-        repository.save(produto);
+    public ResponseEntity<DadosDetalhamentoProduto> cadastraProdutos(@RequestBody @Valid DadosCadastroProdutos dados, UriComponentsBuilder builder) {
+        DadosDetalhamentoProduto produto = productService.saveProduct(dados);
 
-        var uri = builder.path("/produtos/{id}").buildAndExpand(produto.getId()).toUri();
+        var uri = builder.path("/produtos/{id}").buildAndExpand(produto.id()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoProduto(produto));
+        return ResponseEntity.created(uri).body(produto);
     }
 
     @PutMapping
     @Transactional
     public ResponseEntity atualizaProdudos(@RequestBody @Valid DadosAtualizacaoProduto dados) {
-        var produto = repository.getReferenceById(dados.id());
-        produto.atualizaInformacoesProduto(dados);
+        DadosDetalhamentoProduto productUpdated = productService.updateProduct(dados);
 
-        return ResponseEntity.ok(new DadosDetalhamentoProduto(produto));
-
+        return ResponseEntity.ok(productUpdated);
     }
 
     @DeleteMapping("/{id}")
