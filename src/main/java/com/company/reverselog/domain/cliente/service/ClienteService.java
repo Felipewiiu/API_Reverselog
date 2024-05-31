@@ -1,6 +1,6 @@
 package com.company.reverselog.domain.cliente.service;
 
-import com.company.reverselog.controller.exception.ControllerNotFoundExeption;
+import com.company.reverselog.exception.exception.ControllerNotFoundExeption;
 import com.company.reverselog.domain.cliente.dto.CustomerDetailData;
 import com.company.reverselog.domain.cliente.dto.CustumerDTO;
 import com.company.reverselog.domain.cliente.dto.DadosListagemClientes;

@@ -2,7 +2,7 @@ package com.company.reverselog.domain.requestProduct.controller;
 
 import com.company.reverselog.domain.solicitacao.dto.RequestRegistrationData;
 
-import com.company.reverselog.dto.DataListRequestDto;
+import com.company.reverselog.domain.requestProduct.dto.DataListRequestDto;
 import com.company.reverselog.domain.requestProduct.service.MakeRequest;
 
 import jakarta.transaction.Transactional;
