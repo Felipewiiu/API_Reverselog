@@ -9,7 +9,7 @@ import com.company.reverselog.domain.solicitacao.dto.RequestDetailData;
 import com.company.reverselog.domain.solicitacao.dto.RequestRegistrationData;
 import com.company.reverselog.domain.solicitacao.entity.Solicitacao;
 import com.company.reverselog.domain.solicitacao.repository.SolicitacaoRepository;
-import com.company.reverselog.dto.DataListRequestDto;
+import com.company.reverselog.domain.requestProduct.dto.DataListRequestDto;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

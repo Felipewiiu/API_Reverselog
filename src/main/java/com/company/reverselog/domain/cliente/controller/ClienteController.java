@@ -1,17 +1,12 @@
 package com.company.reverselog.domain.cliente.controller;
 
-import com.company.reverselog.controller.exception.ControllerNotFoundExeption;
 import com.company.reverselog.domain.cliente.dto.CustomerDetailData;
-import com.company.reverselog.domain.cliente.dto.CustomerRegistrationData;
 import com.company.reverselog.domain.cliente.dto.CustumerDTO;
 import com.company.reverselog.domain.cliente.dto.DadosListagemClientes;
-import com.company.reverselog.domain.cliente.entity.Cliente;
-import com.company.reverselog.domain.cliente.repository.ClienteRepository;
 import com.company.reverselog.domain.cliente.service.ClienteService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;

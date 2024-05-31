@@ -1,4 +1,4 @@
-package com.company.reverselog.controller.exception;
+package com.company.reverselog.exception.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
