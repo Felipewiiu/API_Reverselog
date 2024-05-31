@@ -58,9 +58,8 @@ public class ProdutoController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity deletaProduto(@PathVariable Long id) {
-        var produto = repository.getReferenceById(id);
-        produto.excluir(id);
-
+        productService.deleteProduct(id);
+        
         return ResponseEntity.noContent().build();
     }
 }
