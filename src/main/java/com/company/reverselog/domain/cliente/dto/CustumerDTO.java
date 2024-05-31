@@ -14,7 +14,7 @@ public record CustumerDTO(
         @NotBlank(message = "O campo telefone não pode estar vazio")
         String telefone,
 
-        @NotNull(message = "O campo cpf não pode estar vazio")
+        @NotBlank(message = "O campo cpf não pode estar vazio")
         @Pattern(regexp = "\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}")
         String cpf,
 
@@ -27,15 +27,16 @@ public record CustumerDTO(
         @NotNull(message = "O campo bairro não pode estar vazio")
         String bairro,
 
-        @NotNull(message = "O campo CEP não pode estar vazio")
+        @NotBlank(message = "O campo CEP não pode estar vazio")
+        @Pattern(regexp = "\\d{5}\\-?\\d{3}", message = "Formato do cep está incorreto")
         String cep,
 
         String numero,
 
         String complemento,
-        @NotNull(message = "O campo cidade não pode estar vazio")
+        @NotBlank(message = "O campo cidade não pode estar vazio")
         String cidade,
-        @NotNull(message = "O campo UF não pode estar vazio")
+        @NotBlank(message = "O campo UF não pode estar vazio")
         String uf
 
 ) {
