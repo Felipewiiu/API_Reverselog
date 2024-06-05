@@ -1,6 +1,7 @@
 package com.company.reverselog.domain.usuario.controller;
 import com.company.reverselog.domain.usuario.dto.AuthenticationDto;
 import com.company.reverselog.domain.usuario.entity.Usuario;
+import com.company.reverselog.infra.TokenJwtData;
 import com.company.reverselog.infra.TokenService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +23,11 @@ public class AutenticacaoController {
 
     @PostMapping
     public ResponseEntity authenticate(@RequestBody @Valid AuthenticationDto data) {
-        var token = new UsernamePasswordAuthenticationToken(data.login(), data.senha());// dto do spring
+        var authenticationToken = new UsernamePasswordAuthenticationToken(data.login(), data.senha());// dto do spring
+        var authentication = manager.authenticate(authenticationToken);
 
-        var authentication = manager.authenticate(token);
-        return ResponseEntity.ok(tokenService.generateToken((Usuario) authentication.getPrincipal()));
+        var tokenJWT = tokenService.generateToken((Usuario) authentication.getPrincipal());
+
+        return ResponseEntity.ok(new TokenJwtData(tokenJWT));
     }
 }
