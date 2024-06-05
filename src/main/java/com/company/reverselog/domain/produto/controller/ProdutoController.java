@@ -5,6 +5,7 @@ import com.company.reverselog.domain.produto.entity.Produto;
 import com.company.reverselog.domain.produto.repository.ProdutoRepository;
 import com.company.reverselog.domain.produto.service.ProductService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +17,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/produtos")
+@RequiredArgsConstructor
 public class ProdutoController {
-    @Autowired
-    private ProdutoRepository repository;
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+
 
     @GetMapping
     public ResponseEntity<Page<DadosListagemProdutosAtivos>> listaProdutosAtivos(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
