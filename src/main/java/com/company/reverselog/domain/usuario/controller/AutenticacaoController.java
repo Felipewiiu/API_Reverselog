@@ -1,8 +1,8 @@
 package com.company.reverselog.domain.usuario.controller;
 import com.company.reverselog.domain.usuario.dto.AuthenticationDto;
 import com.company.reverselog.domain.usuario.entity.Usuario;
-import com.company.reverselog.infra.TokenJwtData;
-import com.company.reverselog.infra.TokenService;
+import com.company.reverselog.infra.security.TokenJwtData;
+import com.company.reverselog.infra.security.TokenService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
