@@ -28,6 +28,8 @@ public class Cliente {
 
     private String email;
 
+    private String password;
+
     private String telefone;
 
     private String cpf;
