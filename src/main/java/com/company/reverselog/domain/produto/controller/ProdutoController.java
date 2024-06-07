@@ -4,6 +4,7 @@ import com.company.reverselog.domain.produto.dto.*;
 import com.company.reverselog.domain.produto.entity.Produto;
 import com.company.reverselog.domain.produto.repository.ProdutoRepository;
 import com.company.reverselog.domain.produto.service.ProductService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @RequestMapping("/produtos")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearer-key")
 public class ProdutoController {
 
     private final ProductService productService;

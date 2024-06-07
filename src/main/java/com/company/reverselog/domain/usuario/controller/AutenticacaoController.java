@@ -3,6 +3,7 @@ import com.company.reverselog.domain.usuario.dto.AuthenticationDto;
 import com.company.reverselog.domain.usuario.entity.Usuario;
 import com.company.reverselog.infra.security.TokenJwtData;
 import com.company.reverselog.infra.security.TokenService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

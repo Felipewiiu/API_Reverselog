@@ -4,6 +4,7 @@ import com.company.reverselog.domain.cliente.dto.CustomerDetailData;
 import com.company.reverselog.domain.cliente.dto.CustumerDTO;
 import com.company.reverselog.domain.cliente.dto.DadosListagemClientes;
 import com.company.reverselog.domain.cliente.service.ClienteService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/clientes")
+@SecurityRequirement(name = "bearer-key")
 public class ClienteController {
 
     @Autowired
