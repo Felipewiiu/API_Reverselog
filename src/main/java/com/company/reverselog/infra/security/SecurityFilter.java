@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class SecurityFilter extends OncePerRequestFilter {
+public class SecurityFilter extends OncePerRequestFilter {// create a new custom filter
 
     private final TokenService tokenService;
     private final UsuarioRepository userRepository;
@@ -32,7 +32,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        }
+        } 
 
         filterChain.doFilter(request, response);
     }
