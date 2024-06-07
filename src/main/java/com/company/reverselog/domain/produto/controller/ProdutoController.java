@@ -4,6 +4,7 @@ import com.company.reverselog.domain.produto.dto.*;
 import com.company.reverselog.domain.produto.entity.Produto;
 import com.company.reverselog.domain.produto.repository.ProdutoRepository;
 import com.company.reverselog.domain.produto.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class ProdutoController {
 
 
     @GetMapping
+    @Operation(summary = "Lista todos os produtos ativos")
     public ResponseEntity<Page<DadosListagemProdutosAtivos>> listaProdutosAtivos(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
         Page<DadosListagemProdutosAtivos> products = productService.findAllProductsActive(pageable);
 
@@ -33,6 +35,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/all")
+    @Operation(summary = "Lista todos os produtos ativos e inativos")
     public ResponseEntity<Page<DadosListagemProdutos>> listaTodosProdutos(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
         Page<DadosListagemProdutos> pageProduct = productService.findAll(pageable);
 

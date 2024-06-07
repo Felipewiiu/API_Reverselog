@@ -42,8 +42,6 @@ public class ClienteController {
     public ResponseEntity<CustumerDTO> registerCustomer(@RequestBody @Valid CustumerDTO data, UriComponentsBuilder builder){
         CustumerDTO custumer = clienteService.saveCustumer(data);
 
-        System.out.println(custumer);
-
         var uri = builder.path("/clientes/{id}").buildAndExpand(custumer.id()).toUri();
 
         return ResponseEntity.created(uri).body(custumer);
