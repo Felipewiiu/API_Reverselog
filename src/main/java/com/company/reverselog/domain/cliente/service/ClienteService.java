@@ -1,21 +1,27 @@
 package com.company.reverselog.domain.cliente.service;
 
+import com.company.reverselog.domain.usuario.entity.Usuario;
+import com.company.reverselog.domain.usuario.repository.UsuarioRepository;
 import com.company.reverselog.exception.exception.ControllerNotFoundExeption;
 import com.company.reverselog.domain.cliente.dto.CustomerDetailData;
 import com.company.reverselog.domain.cliente.dto.CustumerDTO;
 import com.company.reverselog.domain.cliente.dto.DadosListagemClientes;
 import com.company.reverselog.domain.cliente.entity.Cliente;
 import com.company.reverselog.domain.cliente.repository.ClienteRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ClienteService {
-    @Autowired
-    private ClienteRepository repository;
+
+    private final ClienteRepository repository;
+    private final UsuarioRepository userRepository;
 
     public Page<DadosListagemClientes> fildAllActive(Pageable pageable) {
         Page<Cliente> custumer = repository.findAllByAtivoTrue(pageable);
@@ -30,8 +36,14 @@ public class ClienteService {
     }
 
     public CustumerDTO saveCustumer(CustumerDTO data) {
+
+        String passworHash = BCrypt.hashpw(data.password(), BCrypt.gensalt());
+
         Cliente custumer = new Cliente(data);
 
+        Usuario usuario = new Usuario(data.email(), passworHash);
+
+        userRepository.save(usuario);
         repository.save(custumer);
 
         return customerRegistrationDataDTO(custumer);
@@ -79,7 +91,8 @@ public class ClienteService {
                 cliente.getEndereco().getNumero(),
                 cliente.getEndereco().getComplemento(),
                 cliente.getEndereco().getCidade(),
-                cliente.getEndereco().getUf()
+                cliente.getEndereco().getUf(),
+                cliente.getPassword()
         );
     }
 }

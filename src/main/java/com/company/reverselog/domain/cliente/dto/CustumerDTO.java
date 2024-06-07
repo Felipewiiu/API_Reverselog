@@ -37,7 +37,9 @@ public record CustumerDTO(
         @NotBlank(message = "O campo cidade não pode estar vazio")
         String cidade,
         @NotBlank(message = "O campo UF não pode estar vazio")
-        String uf
+        String uf,
+        @NotBlank(message = "O campo password não pode estar vazio")
+        String password
 
 ) {
 
