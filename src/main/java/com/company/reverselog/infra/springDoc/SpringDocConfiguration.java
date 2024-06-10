@@ -12,6 +12,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringDocConfiguration {
 
+    String desc = "API Reverselog é um sistema de gerenciamento " +
+            "de devoluções desenvolvido para automatizar o processo" +
+            " de devolução de produtos em uma empresa de varejo";
+
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
@@ -20,7 +24,7 @@ public class SpringDocConfiguration {
                                 new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")))
                 .info(new Info()
                         .title("ReverseLog API")
-                        .description("API Rest da aplicação reverselog contendo as funcionalidades de solicitação, cadastro de registros de ordem de serviços")
+                        .description(desc)
                         .contact(new Contact()
                                 .name("Time backend")
                                 .email("engenharia2Flex@gmail.com"))
