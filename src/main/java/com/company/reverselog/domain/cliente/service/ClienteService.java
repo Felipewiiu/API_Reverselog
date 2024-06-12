@@ -43,6 +43,8 @@ public class ClienteService {
 
         Usuario usuario = new Usuario(data.email(), passworHash);
 
+        System.out.println("-------> " + usuario.getAuthorities());
+
         userRepository.save(usuario);
         repository.save(custumer);
 

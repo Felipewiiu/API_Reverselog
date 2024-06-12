@@ -17,12 +17,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/clientes")
-@SecurityRequirement(name = "bearer-key")
 public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
 
+    @SecurityRequirement(name = "bearer-key")
     @GetMapping("/ativo")
     public ResponseEntity<Page<DadosListagemClientes>> listCostumerActive(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable){
         Page<DadosListagemClientes> dadosListagemClientes = clienteService.fildAllActive(pageable);
@@ -31,6 +31,7 @@ public class ClienteController {
     }
 
     @GetMapping("/all")
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<Page<DadosListagemClientes>> listAllCostumers(@PageableDefault(size = 5,sort = {"id"}) Pageable pageable){
         Page<DadosListagemClientes> dadosListagemClientes = clienteService.findAllCustumer(pageable);
 
@@ -49,6 +50,7 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     @Transactional
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<CustomerDetailData> updateCustumer(@PathVariable Long id, @RequestBody @Valid CustomerDetailData data){
        CustomerDetailData custumer = clienteService.updateCustumer(id, data);
 
@@ -57,6 +59,7 @@ public class ClienteController {
 
     @DeleteMapping("/{id}")
     @Transactional
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<Void> deleteCustumer(@PathVariable Long id){
         clienteService.deleteCustumer(id);
 

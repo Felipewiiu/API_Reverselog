@@ -1,10 +1,7 @@
 package com.company.reverselog.domain.usuario.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +13,7 @@ import java.util.List;
 @Table(name = "tb_usuarios")
 @Getter
 @AllArgsConstructor
+@ToString
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Usuario implements UserDetails {
@@ -28,6 +26,8 @@ public class Usuario implements UserDetails {
 
     private String senha;
 
+    private boolean isAdmin = false;
+
     public Usuario(String email, String password) {
         this.login = email;
         this.senha = password;
@@ -35,8 +35,15 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-        //Aqui colocamos uma coleção de perfil de usuário
+
+        if (isAdmin) {
+            return List.of(
+                    new SimpleGrantedAuthority("ROLE_ADMIN")
+            );
+        }else{
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+
     }
 
     @Override
