@@ -1,8 +1,7 @@
 package com.company.reverselog.domain.requestProduct.entity;
 
-import com.company.reverselog.domain.produto.entity.Produto;
-import com.company.reverselog.domain.requestProduct.dto.RequestProductDto;
-import com.company.reverselog.domain.solicitacao.entity.Solicitacao;
+import com.company.reverselog.domain.product.entity.Produto;
+import com.company.reverselog.domain.request.entity.Solicitacao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;

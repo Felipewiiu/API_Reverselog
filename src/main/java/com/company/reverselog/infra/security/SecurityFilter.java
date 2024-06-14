@@ -1,7 +1,6 @@
 package com.company.reverselog.infra.security;
 
-import com.company.reverselog.domain.usuario.repository.UsuarioRepository;
-import jakarta.servlet.Filter;
+import com.company.reverselog.domain.user.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
