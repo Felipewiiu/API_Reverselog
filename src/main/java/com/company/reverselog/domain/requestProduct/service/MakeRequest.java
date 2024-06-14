@@ -1,14 +1,14 @@
 package com.company.reverselog.domain.requestProduct.service;
 
-import com.company.reverselog.domain.cliente.entity.Cliente;
-import com.company.reverselog.domain.cliente.repository.ClienteRepository;
-import com.company.reverselog.domain.produto.repository.ProdutoRepository;
+import com.company.reverselog.domain.custumer.entity.Cliente;
+import com.company.reverselog.domain.custumer.repository.ClienteRepository;
+import com.company.reverselog.domain.product.repository.ProdutoRepository;
 import com.company.reverselog.domain.requestProduct.entity.RequestProduct;
 import com.company.reverselog.domain.requestProduct.repository.RequestProductsRepository;
-import com.company.reverselog.domain.solicitacao.dto.RequestDetailData;
-import com.company.reverselog.domain.solicitacao.dto.RequestRegistrationData;
-import com.company.reverselog.domain.solicitacao.entity.Solicitacao;
-import com.company.reverselog.domain.solicitacao.repository.SolicitacaoRepository;
+import com.company.reverselog.domain.request.dto.RequestDetailData;
+import com.company.reverselog.domain.request.dto.RequestRegistrationData;
+import com.company.reverselog.domain.request.entity.Solicitacao;
+import com.company.reverselog.domain.request.repository.SolicitacaoRepository;
 import com.company.reverselog.domain.requestProduct.dto.DataListRequestDto;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
