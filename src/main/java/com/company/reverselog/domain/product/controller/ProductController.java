@@ -34,7 +34,7 @@ public class ProductController {
 
     @GetMapping("/all")
     @Operation(summary = "Lista todos os produtos ativos e inativos")
-    @Secured("ROULE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Page<DadosListagemProdutos>> listaTodosProdutos(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
         Page<DadosListagemProdutos> pageProduct = productService.findAll(pageable);
 
@@ -43,7 +43,7 @@ public class ProductController {
 
     @PostMapping
     @Transactional
-    @Secured("ROULE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<DadosDetalhamentoProduto> cadastraProdutos(@RequestBody @Valid DadosCadastroProdutos dados, UriComponentsBuilder builder) {
         DadosDetalhamentoProduto produto = productService.saveProduct(dados);
 
@@ -54,19 +54,19 @@ public class ProductController {
 
     @PutMapping
     @Transactional
-    @Secured("ROULE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity atualizaProdudos(@RequestBody @Valid DadosAtualizacaoProduto dados) {
         DadosDetalhamentoProduto productUpdated = productService.updateProduct(dados);
-
+        System.out.println("passou------->");
         return ResponseEntity.ok(productUpdated);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    @Secured("ROULE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity deletaProduto(@PathVariable Long id) {
         productService.deleteProduct(id);
-        
+
         return ResponseEntity.noContent().build();
     }
 }

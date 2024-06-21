@@ -27,7 +27,7 @@ public class AutenticationController {
     public ResponseEntity authenticate(@RequestBody @Valid AuthenticationDto data) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(data.login(), data.senha());// dto do spring
         var authentication = manager.authenticate(authenticationToken);
-
+        System.out.println("----->>" + authentication.getAuthorities());
         var tokenJWT = tokenService.generateToken((Usuario) authentication.getPrincipal());
 
         return ResponseEntity.ok(new TokenJwtData(tokenJWT));

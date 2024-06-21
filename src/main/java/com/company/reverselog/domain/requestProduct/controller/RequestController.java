@@ -24,7 +24,7 @@ public class RequestController {
 
 
     @GetMapping
-    @Secured("ROULE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<Page<DataListRequestDto>> findAllRequests(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
         Page<DataListRequestDto> dataListRequestDto = makeRequestService.findAllRequest(pageable);

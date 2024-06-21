@@ -38,7 +38,7 @@ public class CustumerController {
         return ResponseEntity.ok(dadosListagemClientes);
     }
 
-    @PostMapping
+    @PostMapping("/post")
     @Transactional
     public ResponseEntity<CustumerDTO> registerCustomer(@RequestBody @Valid CustumerDTO data, UriComponentsBuilder builder){
         CustumerDTO custumer = clienteService.saveCustumer(data);
@@ -48,7 +48,7 @@ public class CustumerController {
         return ResponseEntity.created(uri).body(custumer);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     @Transactional
     @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<CustomerDetailData> updateCustumer(@PathVariable Long id, @RequestBody @Valid CustomerDetailData data){
@@ -57,7 +57,7 @@ public class CustumerController {
         return ResponseEntity.ok(custumer);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     @Transactional
     @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<Void> deleteCustumer(@PathVariable Long id){
