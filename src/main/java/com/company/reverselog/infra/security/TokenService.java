@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.List;
 
 @Service
 public class TokenService {
@@ -25,6 +26,7 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("API_Reverselog")
                     .withSubject(usuario.getLogin())
+                    .withClaim("ROLE", usuario.getAuthorities().toString())
                     .withExpiresAt(dataExpiresAt())
                     .sign(algorithm);
         } catch (JWTCreationException exception){
