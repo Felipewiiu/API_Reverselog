@@ -25,7 +25,7 @@ public class ProductController {
 
 
     @GetMapping
-    @Operation(summary = "Lista todos os produtos ativos")
+    @Operation(summary = "Lista todos os produtos ativos no sistema")
     public ResponseEntity<Page<DadosListagemProdutosAtivos>> listaProdutosAtivos(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
         Page<DadosListagemProdutosAtivos> products = productService.findAllProductsActive(pageable);
 
@@ -33,7 +33,7 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    @Operation(summary = "Lista todos os produtos ativos e inativos")
+    @Operation(summary = "Lista todos os produtos ativos e inativos no sistema")
     @Secured("ROLE_ADMIN")
     public ResponseEntity<Page<DadosListagemProdutos>> listaTodosProdutos(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
         Page<DadosListagemProdutos> pageProduct = productService.findAll(pageable);
@@ -44,6 +44,7 @@ public class ProductController {
     @PostMapping
     @Transactional
     @Secured("ROLE_ADMIN")
+    @Operation(summary = "Cadatra um produto no sistema")
     public ResponseEntity<DadosDetalhamentoProduto> cadastraProdutos(@RequestBody @Valid DadosCadastroProdutos dados, UriComponentsBuilder builder) {
         DadosDetalhamentoProduto produto = productService.saveProduct(dados);
 
@@ -55,15 +56,17 @@ public class ProductController {
     @PutMapping
     @Transactional
     @Secured("ROLE_ADMIN")
+    @Operation(summary = "Atuliza informação de um produto no sistema")
     public ResponseEntity atualizaProdudos(@RequestBody @Valid DadosAtualizacaoProduto dados) {
         DadosDetalhamentoProduto productUpdated = productService.updateProduct(dados);
-        System.out.println("passou------->");
+
         return ResponseEntity.ok(productUpdated);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     @Secured("ROLE_ADMIN")
+    @Operation(summary = "Inativa um cliente no sistema")
     public ResponseEntity deletaProduto(@PathVariable Long id) {
         productService.deleteProduct(id);
 

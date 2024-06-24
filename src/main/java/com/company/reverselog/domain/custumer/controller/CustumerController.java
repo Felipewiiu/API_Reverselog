@@ -4,6 +4,7 @@ import com.company.reverselog.domain.custumer.dto.CustomerDetailData;
 import com.company.reverselog.domain.custumer.dto.CustumerDTO;
 import com.company.reverselog.domain.custumer.dto.DadosListagemClientes;
 import com.company.reverselog.domain.custumer.service.ClienteService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -24,6 +25,7 @@ public class CustumerController {
 
     @SecurityRequirement(name = "bearer-key")
     @GetMapping("/ativo")
+    @Operation(summary = "Lista todos os clientes ativos no sistema")
     public ResponseEntity<Page<DadosListagemClientes>> listCostumerActive(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable){
         Page<DadosListagemClientes> dadosListagemClientes = clienteService.fildAllActive(pageable);
 
@@ -32,6 +34,7 @@ public class CustumerController {
 
     @GetMapping("/all")
     @SecurityRequirement(name = "bearer-key")
+    @Operation(summary = "Lista todos os cliente ativos e inativos no sistema")
     public ResponseEntity<Page<DadosListagemClientes>> listAllCostumers(@PageableDefault(size = 5,sort = {"id"}) Pageable pageable){
         Page<DadosListagemClientes> dadosListagemClientes = clienteService.findAllCustumer(pageable);
 
@@ -40,6 +43,7 @@ public class CustumerController {
 
     @PostMapping("/post")
     @Transactional
+    @Operation(summary = "Cadastra um novo clientes no sistema")
     public ResponseEntity<CustumerDTO> registerCustomer(@RequestBody @Valid CustumerDTO data, UriComponentsBuilder builder){
         CustumerDTO custumer = clienteService.saveCustumer(data);
 
@@ -51,6 +55,7 @@ public class CustumerController {
     @PutMapping("/update/{id}")
     @Transactional
     @SecurityRequirement(name = "bearer-key")
+    @Operation(summary = "Atualiza os registro de um cliente no sistema")
     public ResponseEntity<CustomerDetailData> updateCustumer(@PathVariable Long id, @RequestBody @Valid CustomerDetailData data){
        CustomerDetailData custumer = clienteService.updateCustumer(id, data);
 
@@ -60,6 +65,7 @@ public class CustumerController {
     @DeleteMapping("/delete/{id}")
     @Transactional
     @SecurityRequirement(name = "bearer-key")
+    @Operation(summary = "Inativa um cliente no sistema")
     public ResponseEntity<Void> deleteCustumer(@PathVariable Long id){
         clienteService.deleteCustumer(id);
 

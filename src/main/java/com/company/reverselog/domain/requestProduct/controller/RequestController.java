@@ -5,6 +5,7 @@ import com.company.reverselog.domain.request.dto.RequestRegistrationData;
 import com.company.reverselog.domain.requestProduct.dto.DataListRequestDto;
 import com.company.reverselog.domain.requestProduct.service.MakeRequest;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class RequestController {
     @GetMapping
     @Secured("ROLE_ADMIN")
     @SecurityRequirement(name = "bearer-key")
+    @Operation(summary = "Recupera todas as solicitações de ordem de serviço do sistema")
     public ResponseEntity<Page<DataListRequestDto>> findAllRequests(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
         Page<DataListRequestDto> dataListRequestDto = makeRequestService.findAllRequest(pageable);
 
@@ -35,6 +37,7 @@ public class RequestController {
 
     @PostMapping
     @Transactional
+    @Operation(summary = "Cria uma solicitação de ordem de serviço no sistema")
     public ResponseEntity registrationRequest(@RequestBody RequestRegistrationData request, UriComponentsBuilder uriBuilder) {
         var dto = makeRequestService.saveRequest(request);
 

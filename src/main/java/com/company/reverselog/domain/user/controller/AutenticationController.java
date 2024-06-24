@@ -3,6 +3,7 @@ import com.company.reverselog.domain.user.dto.AuthenticationDto;
 import com.company.reverselog.domain.user.entity.Usuario;
 import com.company.reverselog.infra.security.TokenJwtData;
 import com.company.reverselog.infra.security.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class AutenticationController {
 
     @PostMapping
     @Transactional
+    @Operation(summary = "Realiza o login no sistema")
     public ResponseEntity authenticate(@RequestBody @Valid AuthenticationDto data) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(data.login(), data.senha());// dto do spring
         var authentication = manager.authenticate(authenticationToken);
