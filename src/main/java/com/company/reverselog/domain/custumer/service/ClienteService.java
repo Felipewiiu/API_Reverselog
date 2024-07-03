@@ -80,6 +80,7 @@ public class ClienteService {
     private CustumerDTO customerRegistrationDataDTO(Cliente cliente) {
         return new CustumerDTO(
                 cliente.getId(),
+                cliente.getName(),
                 cliente.getEmail(),
                 cliente.getTelefone(),
                 cliente.getCpf(),

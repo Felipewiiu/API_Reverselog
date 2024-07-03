@@ -26,6 +26,8 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     private String email;
 
     private String password;
@@ -52,6 +54,7 @@ public class Cliente {
     }
 
     public Cliente(CustumerDTO data) {
+        this.name = data.name();
         this.email = data.email();
         this.telefone = data.telefone();
         this.cpf = data.cpf();

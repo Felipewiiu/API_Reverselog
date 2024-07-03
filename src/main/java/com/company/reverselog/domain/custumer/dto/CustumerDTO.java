@@ -7,6 +7,10 @@ import jakarta.validation.constraints.Pattern;
 
 public record CustumerDTO(
         Long id,
+
+        @NotBlank(message = "O campo nome não pode estar vazio")
+        String name,
+
         @NotBlank(message = "O campo email não pode estar vazio")
         @Email
         String email,
@@ -34,10 +38,14 @@ public record CustumerDTO(
         String numero,
 
         String complemento,
+
         @NotBlank(message = "O campo cidade não pode estar vazio")
         String cidade,
+
         @NotBlank(message = "O campo UF não pode estar vazio")
+        @Pattern(regexp = "^(AC|AL|AM|AP|BA|CE|DF|ES|GO|MA|MG|MS|MT|PA|PB|PE|PI|PR|RJ|RN|RO|RR|RS|SC|SE|SP|TO)$", message = "Digite uma UF válida com letras maiuscula")
         String uf,
+
         @NotBlank(message = "O campo password não pode estar vazio")
         String password
 
