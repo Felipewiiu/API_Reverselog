@@ -72,5 +72,15 @@ public class CustumerController {
         return ResponseEntity.noContent().build();
     }
 
+    @Transactional
+    @SecurityRequirement(name = "bearer-key")
+    @Operation(summary = "Atualiza os registro de um cliente no sistema pelo seu email")
+    @PutMapping("/update-custumer")
+    public ResponseEntity<CustomerDetailData>  updateCustumerByEmail(@RequestParam("email") String email, @RequestBody CustomerDetailData data) {
+        CustomerDetailData custumer = clienteService.updateCustumerByEmail(email, data);
+
+        return ResponseEntity.ok(custumer);
+    }
+
 
 }

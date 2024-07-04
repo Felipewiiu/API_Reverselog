@@ -28,12 +28,14 @@ public class Cliente {
 
     private String name;
 
+//    @Column(unique = true)
     private String email;
 
     private String password;
 
     private String telefone;
 
+    @Column(unique = true)
     private String cpf;
 
     private String cnpj;

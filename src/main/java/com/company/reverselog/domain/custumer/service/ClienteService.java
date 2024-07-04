@@ -64,6 +64,12 @@ public class ClienteService {
         custumer.deleteCustumer();
     }
 
+    public CustomerDetailData updateCustumerByEmail(String email, CustomerDetailData data) {
+        Cliente custumer = repository.findByEmail(email);
+        custumer.updateCustumerData(data);
+        return new CustomerDetailData(custumer);
+    }
+
     private DadosListagemClientes toDTO(Cliente cliente) {
         return new DadosListagemClientes(
                 cliente.getId(),
