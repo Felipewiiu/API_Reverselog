@@ -67,8 +67,9 @@ public class ClienteService {
 
     public CustomerUpdateRegister updateCustumerByEmail(String email, CustomerUpdateRegister data) {
         Cliente custumer = repository.findByEmail(email);
-        System.out.println(custumer);
+
         custumer.updateCustumerData(data);
+
         return new CustomerUpdateRegister(custumer);
     }
 
