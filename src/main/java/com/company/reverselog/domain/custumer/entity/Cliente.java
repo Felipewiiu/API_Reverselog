@@ -2,6 +2,7 @@ package com.company.reverselog.domain.custumer.entity;
 
 import com.company.reverselog.domain.custumer.dto.CustomerDetailData;
 import com.company.reverselog.domain.custumer.dto.CustomerRegistrationData;
+import com.company.reverselog.domain.custumer.dto.CustomerUpdateRegister;
 import com.company.reverselog.domain.custumer.dto.CustumerDTO;
 import com.company.reverselog.domain.address.entity.Endereco;
 import com.company.reverselog.domain.request.entity.Solicitacao;
@@ -28,7 +29,7 @@ public class Cliente {
 
     private String name;
 
-//    @Column(unique = true)
+    @Column(unique = true)
     private String email;
 
     private String password;
@@ -92,6 +93,21 @@ public class Cliente {
         }
         if(data.ativo() != null){
             this.ativo = data.ativo();
+        }
+    }
+
+    public void updateCustumerData(CustomerUpdateRegister data) {
+        if(data.telefone() != null){
+            this.telefone = data.telefone();
+        }
+        if(data.cnpj() != null){
+            this.cnpj = data.cnpj();
+        }
+        if(data.endereco() != null){
+            this.endereco.updateAddress(data.endereco());
+        }
+        if(data.name() != null){
+            this.name = data.name();
         }
     }
 

@@ -36,7 +36,7 @@ public class SecurityConfiguration {
                     ).hasRole("ADMIN");
                     req.requestMatchers("clientes/post").permitAll();
                     req.requestMatchers("/login").permitAll();
-                    req.requestMatchers("clientes/update-custumer");
+                    req.requestMatchers("clientes/update-custumer").permitAll();
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "swagger-ui/**").permitAll();
                     req.anyRequest().authenticated();
                 })
