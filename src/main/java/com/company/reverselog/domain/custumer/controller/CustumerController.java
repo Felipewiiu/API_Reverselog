@@ -1,9 +1,6 @@
 package com.company.reverselog.domain.custumer.controller;
 
-import com.company.reverselog.domain.custumer.dto.CustomerDetailData;
-import com.company.reverselog.domain.custumer.dto.CustomerUpdateRegister;
-import com.company.reverselog.domain.custumer.dto.CustumerDTO;
-import com.company.reverselog.domain.custumer.dto.DadosListagemClientes;
+import com.company.reverselog.domain.custumer.dto.*;
 import com.company.reverselog.domain.custumer.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -83,7 +80,6 @@ public class CustumerController {
 
         return ResponseEntity.ok(custumer);
     }
-
 
 
 
