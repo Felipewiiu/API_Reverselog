@@ -57,7 +57,7 @@ public class ProductController {
     @Transactional
     @Secured("ROLE_ADMIN")
     @Operation(summary = "Atuliza informação de um produto no sistema")
-    public ResponseEntity atualizaProdudos(@RequestBody @Valid DadosAtualizacaoProduto dados) {
+    public ResponseEntity<DadosDetalhamentoProduto> atualizaProdudos(@RequestBody @Valid DadosAtualizacaoProduto dados) {
         DadosDetalhamentoProduto productUpdated = productService.updateProduct(dados);
 
         return ResponseEntity.ok(productUpdated);
@@ -67,7 +67,7 @@ public class ProductController {
     @Transactional
     @Secured("ROLE_ADMIN")
     @Operation(summary = "Inativa um cliente no sistema")
-    public ResponseEntity deletaProduto(@PathVariable Long id) {
+    public ResponseEntity<Void> deletaProduto(@PathVariable Long id) {
         productService.deleteProduct(id);
 
         return ResponseEntity.noContent().build();
