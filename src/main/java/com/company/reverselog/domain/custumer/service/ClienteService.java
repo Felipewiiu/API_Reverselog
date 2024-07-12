@@ -1,9 +1,6 @@
 package com.company.reverselog.domain.custumer.service;
 
-import com.company.reverselog.domain.custumer.dto.CustomerDetailData;
-import com.company.reverselog.domain.custumer.dto.CustomerUpdateRegister;
-import com.company.reverselog.domain.custumer.dto.CustumerDTO;
-import com.company.reverselog.domain.custumer.dto.DadosListagemClientes;
+import com.company.reverselog.domain.custumer.dto.*;
 import com.company.reverselog.domain.custumer.entity.Cliente;
 import com.company.reverselog.domain.custumer.repository.ClienteRepository;
 import com.company.reverselog.domain.user.entity.Usuario;
@@ -73,6 +70,12 @@ public class ClienteService {
         return new CustomerUpdateRegister(custumer);
     }
 
+    public CustumerDTO findCustomerByEmail(EmailCustomerDto email) {
+        Cliente  custumer = repository.findByEmail(email.email());
+        System.out.println(custumer);
+        return  new CustumerDTO(custumer);
+    }
+
     private DadosListagemClientes toDTO(Cliente cliente) {
         return new DadosListagemClientes(
                 cliente.getId(),
@@ -104,4 +107,6 @@ public class ClienteService {
                 cliente.getPassword()
         );
     }
+
+
 }

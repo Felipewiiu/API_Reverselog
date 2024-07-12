@@ -1,5 +1,6 @@
 package com.company.reverselog.domain.custumer.dto;
 
+import com.company.reverselog.domain.custumer.entity.Cliente;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -51,4 +52,23 @@ public record CustumerDTO(
 
 ) {
 
+        public CustumerDTO(Cliente custumer) {
+                this(
+                        custumer.getId(),
+                        custumer.getName(),
+                        custumer.getEmail(),
+                        custumer.getTelefone(),
+                        custumer.getCpf(),
+                        custumer.getCnpj(),
+                        custumer.getEndereco().getLogradouro(),
+                        custumer.getEndereco().getBairro(),
+                        custumer.getEndereco().getCep(),
+                        custumer.getEndereco().getNumero(),
+                        custumer.getEndereco().getComplemento(),
+                        custumer.getEndereco().getCidade(),
+                        custumer.getEndereco().getUf(),
+                        custumer.getPassword()
+
+                );
+        }
 }

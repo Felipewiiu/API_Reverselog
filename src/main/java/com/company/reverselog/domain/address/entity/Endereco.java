@@ -2,15 +2,13 @@ package com.company.reverselog.domain.address.entity;
 
 import com.company.reverselog.domain.address.dto.AddressData;
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Embeddable
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @EqualsAndHashCode(of = "id")
 public class Endereco {
     private String logradouro;

@@ -1,6 +1,7 @@
 package com.company.reverselog.domain.custumer.controller;
 
 import com.company.reverselog.domain.custumer.dto.*;
+import com.company.reverselog.domain.custumer.entity.Cliente;
 import com.company.reverselog.domain.custumer.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -38,6 +39,15 @@ public class CustumerController {
         Page<DadosListagemClientes> dadosListagemClientes = clienteService.findAllCustumer(pageable);
 
         return ResponseEntity.ok(dadosListagemClientes);
+    }
+
+    @GetMapping("/get-email")
+    @SecurityRequirement(name = "bearer-key")
+    @Operation(summary = "Lista cliente por email")
+    public ResponseEntity findCustomerByEmail (@RequestParam("email") EmailCustomerDto email){
+        CustumerDTO cliente = clienteService.findCustomerByEmail(email);
+        System.out.println("--------> passou");
+        return  ResponseEntity.ok(cliente);
     }
 
     @PostMapping("/post")
