@@ -12,38 +12,46 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductService {
     @Autowired
-    private ProdutoRepository repository;
+    private ProdutoRepository productRepository;
 
     public Page<DadosListagemProdutosAtivos> findAllProductsActive(Pageable pageable) {
-        Page<Produto> page = repository.findAllByAtivoTrue(pageable);
+        Page<Produto> page = productRepository.findAllByAtivoTrue(pageable);
 
         return page.map(this::toDTO);
     }
 
     public Page<DadosListagemProdutos> findAll(Pageable pageable) {
-        Page<Produto> product = repository.findAll(pageable);
+        Page<Produto> product = productRepository.findAll(pageable);
 
         return product.map(this::toListagemProductDTO);
     }
 
     public DadosDetalhamentoProduto saveProduct(DadosCadastroProdutos dados){
         var produto = new Produto(dados);
-        repository.save(produto);
+        productRepository.save(produto);
 
         return this.toDetalhamentoProductDTO(produto);
     }
 
     public DadosDetalhamentoProduto updateProduct(DadosAtualizacaoProduto dados){
-        Produto produto = repository.getReferenceById(dados.id());
+        Produto produto = productRepository.getReferenceById(dados.id());
         produto.atualizaInformacoesProduto(dados);
 
         return this.toDetalhamentoProductDTO(produto);
     }
 
     public void deleteProduct(Long id){
-        var produto = repository.findById(id)
+        var produto = productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado"));
         produto.excluir(id);
+    }
+
+    public DadosDetalhamentoProduto findProductById(Long id) {
+        var product = productRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Produto não encontrado na base de dados"));
+
+        return this.toDetalhamentoProductDTO(product);
+
     }
 
     private DadosListagemProdutosAtivos toDTO(Produto produto) {
@@ -55,6 +63,8 @@ public class ProductService {
                 produto.getImage()
         );
     }
+
+
 
     private DadosListagemProdutos toListagemProductDTO(Produto produto) {
         return new DadosListagemProdutos(
@@ -77,5 +87,6 @@ public class ProductService {
 
         );
     }
+
 
 }

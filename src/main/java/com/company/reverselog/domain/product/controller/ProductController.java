@@ -41,6 +41,13 @@ public class ProductController {
         return ResponseEntity.ok(pageProduct);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoProduto> findProductByID(@PathVariable Long id){
+        DadosDetalhamentoProduto product = productService.findProductById(id);
+
+        return ResponseEntity.ok(product);
+    }
+
     @PostMapping
     @Transactional
     @Secured("ROLE_ADMIN")
