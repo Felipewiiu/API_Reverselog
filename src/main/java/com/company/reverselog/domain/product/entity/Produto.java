@@ -2,6 +2,7 @@ package com.company.reverselog.domain.product.entity;
 
 import com.company.reverselog.domain.product.dto.DadosAtualizacaoProduto;
 import com.company.reverselog.domain.product.dto.DadosCadastroProdutos;
+import com.company.reverselog.domain.product.service.ChangeBase64ForByte;
 import com.company.reverselog.domain.requestProduct.entity.RequestProduct;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -28,11 +29,13 @@ public class Produto {
 
     private String modelo;
 
-    private Integer numero_de_serie;
-
     private Integer ncm;
 
     private Boolean ativo = true;
+
+    @Lob
+    @Column(columnDefinition="BLOB")
+    private byte[] image;
 
     @JsonIgnore
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
@@ -41,8 +44,8 @@ public class Produto {
     public Produto(DadosCadastroProdutos dados) {
         this.nome = dados.nome();
         this.modelo = dados.modelo();
-        this.numero_de_serie = dados.numero_de_serie();
         this.ncm = dados.ncm();
+        this.image = ChangeBase64ForByte.changeBase64(dados.image());
         this.ativo = true;
     }
 
@@ -58,9 +61,7 @@ public class Produto {
         if(produto.modelo() != null){
             this.modelo = produto.modelo();
         }
-        if(produto.numero_de_serie() != null){
-            this.numero_de_serie = produto.numero_de_serie();
-        }
+
         if(produto.ncm() != null){
             this.ncm = produto.ncm();
         }

@@ -11,6 +11,8 @@ public record DadosCadastroProdutos(
         @NotNull(message = "O campo numero_de_serie não pode estar em branco")
         Integer numero_de_serie,
         @NotNull(message = "O campo ncm não pode estar em branco e deve conter 8 caracteres numéricos")
-        Integer ncm
+        Integer ncm,
+        @NotNull
+        String image
 ) {
 }

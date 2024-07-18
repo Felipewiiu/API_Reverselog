@@ -51,8 +51,8 @@ public class ProductService {
                 produto.getId(),
                 produto.getNome(),
                 produto.getModelo(),
-                produto.getNumero_de_serie(),
-                produto.getNcm()
+                produto.getNcm(),
+                produto.getImage()
         );
     }
 
@@ -61,7 +61,6 @@ public class ProductService {
                 produto.getId(),
                 produto.getNome(),
                 produto.getModelo(),
-                produto.getNumero_de_serie(),
                 produto.getNcm(),
                 produto.getAtivo()
         );
@@ -72,9 +71,9 @@ public class ProductService {
                 produto.getId(),
                 produto.getNome(),
                 produto.getModelo(),
-                produto.getNumero_de_serie(),
                 produto.getNcm(),
-                produto.getAtivo()
+                produto.getAtivo(),
+                produto.getImage()
 
         );
     }
