@@ -34,7 +34,7 @@ public class Produto {
     private Boolean ativo = true;
 
     @Lob
-    @Column(columnDefinition="BLOB")
+    @Column(columnDefinition="MEDIUMBLOB")
     private byte[] image;
 
     @JsonIgnore
@@ -67,6 +67,9 @@ public class Produto {
         }
         if(produto.ativo() != null){
             this.ativo = produto.ativo();
+        }
+        if(produto.image() != null) {
+            this.image = ChangeBase64ForByte.changeBase64(produto.image());
         }
 
     }

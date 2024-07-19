@@ -9,6 +9,7 @@ public record DadosAtualizacaoProduto(
         String modelo,
         Integer numero_de_serie,
         Integer ncm,
-        Boolean ativo
+        Boolean ativo,
+        String image
 ) {
 }
