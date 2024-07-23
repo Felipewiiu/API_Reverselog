@@ -9,7 +9,7 @@ public record DataListRequestDto(
         Long Id_solicitacao,
         Cliente cliente,
         Status status,
-        String nf_compra,
+        byte[] nf_compra,
         LocalDateTime data
 
 ) {

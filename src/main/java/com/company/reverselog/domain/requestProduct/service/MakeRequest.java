@@ -3,6 +3,7 @@ package com.company.reverselog.domain.requestProduct.service;
 import com.company.reverselog.domain.custumer.entity.Cliente;
 import com.company.reverselog.domain.custumer.repository.ClienteRepository;
 import com.company.reverselog.domain.product.repository.ProdutoRepository;
+import com.company.reverselog.domain.product.service.ChangeBase64ForByte;
 import com.company.reverselog.domain.requestProduct.entity.RequestProduct;
 import com.company.reverselog.domain.requestProduct.repository.RequestProductsRepository;
 import com.company.reverselog.domain.request.dto.RequestDetailData;
@@ -50,7 +51,7 @@ public class MakeRequest {
 
         });
 
-        solicitacao.setNf_compra(data.nf_compra());
+        solicitacao.setNf_compra(ChangeBase64ForByte.changeBase64(data.nf_compra()));
         solicitacao.setDescricao_defeito(data.descricao_defeito());
         solicitacao.setCliente(custumer);
         solicitacao.setStatus(data.status());

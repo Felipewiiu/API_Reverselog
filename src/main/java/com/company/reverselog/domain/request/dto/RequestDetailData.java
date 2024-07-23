@@ -3,15 +3,17 @@ package com.company.reverselog.domain.request.dto;
 import com.company.reverselog.domain.custumer.entity.Cliente;
 import com.company.reverselog.domain.request.entity.Solicitacao;
 import com.company.reverselog.domain.request.Status;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 public record RequestDetailData(
 
-        String nf_compra,
+        byte[] nf_compra,
 
-        @NotNull
+        @NotBlank(message = "O campo descição de defeito não pode estar em branco ou nulo")
         String descricao_defeito,
 
         LocalDateTime data,

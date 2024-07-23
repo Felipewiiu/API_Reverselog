@@ -1,6 +1,7 @@
 package com.company.reverselog.domain.request.entity;
 
 import com.company.reverselog.domain.custumer.entity.Cliente;
+import com.company.reverselog.domain.product.service.ChangeBase64ForByte;
 import com.company.reverselog.domain.requestProduct.entity.RequestProduct;
 import com.company.reverselog.domain.request.Status;
 import com.company.reverselog.domain.request.dto.SolicitacaoDto;
@@ -24,7 +25,9 @@ public class Solicitacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nf_compra;
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private byte[] nf_compra;
 
     @JsonIgnore
     @OneToMany(mappedBy = "solicitacao", cascade = CascadeType.ALL)
@@ -43,11 +46,13 @@ public class Solicitacao {
     @JoinColumn(name = "cliente_id")// nome da chave estrangeira
     private Cliente cliente;
 
-    public Solicitacao(SolicitacaoDto solicitacaoDto) {
-        this.nf_compra = solicitacaoDto.nf_compra();
-        this.data = LocalDateTime.now();
-        this.descricao_defeito = solicitacaoDto.descricao_defeito();
-        this.cliente = solicitacaoDto.cliente();
+//    public Solicitacao(SolicitacaoDto solicitacaoDto) {
+//        this.nf_compra = ChangeBase64ForByte.changeBase64(solicitacaoDto.nf_compra());
+//        this.data = LocalDateTime.now();
+//        this.descricao_defeito = solicitacaoDto.descricao_defeito();
+//        this.cliente = solicitacaoDto.cliente();
+//
+//    }
 
-    }
+
 }

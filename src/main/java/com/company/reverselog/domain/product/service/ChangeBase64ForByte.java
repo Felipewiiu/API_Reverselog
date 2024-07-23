@@ -7,13 +7,13 @@ public class ChangeBase64ForByte {
 
     private static final Pattern BASE64_PATTERN = Pattern.compile("^[A-Za-z0-9+/=]+$");
 
-    public static byte[]  changeBase64(String image){
+    public static byte[]  changeBase64(String stringBase64){
 
-        if (!BASE64_PATTERN.matcher(image).matches()) {
+        if (!BASE64_PATTERN.matcher(stringBase64).matches()) {
             throw new IllegalArgumentException("String contém caracteres inválidos para Base64");
         }
 
-        byte[] imageBytes = Base64.getDecoder().decode(image);
+        byte[] imageBytes = Base64.getDecoder().decode(stringBase64);
 
         return imageBytes;
 
