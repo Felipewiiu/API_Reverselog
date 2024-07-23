@@ -63,7 +63,8 @@ public class ClienteService {
     }
 
     public CustomerUpdateRegister updateCustumerByEmail(String email, CustomerUpdateRegister data) {
-        Cliente custumer = repository.findByEmail(email);
+        Cliente custumer = repository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente não está cadastrado na base de dados"));
 
         custumer.updateCustumerData(data);
 
@@ -71,7 +72,8 @@ public class ClienteService {
     }
 
     public CustumerDTO findCustomerByEmail(EmailCustomerDto email) {
-        Cliente  custumer = repository.findByEmail(email.email());
+        Cliente  custumer = repository.findByEmail(email.email())
+                .orElseThrow(() -> new IllegalArgumentException("Cliente não está cadastrado na base de dados"));
         System.out.println(custumer);
         return  new CustumerDTO(custumer);
     }

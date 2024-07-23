@@ -7,14 +7,15 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public record RequestRegistrationData(
+
         String nf_compra,
+
         List<QuantityProducts> produto,
 
         @NotBlank(message = "O campo descrição de defeito não pode ser null ou vazio")
         String descricao_defeito,
-        Status status,
-        Long cliente_id,
-        Integer quantidade
+
+        String cliente_id
 ) {
 
 }
