@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  reverslog_db:
+    image: mysql:8.4.2-oracle
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: reverse_log
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  reverselog_api:
+    build:
+      context: ./
+    depends_on:
+      reverslog_db:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    environment:
+      DB_HOST: reverslog_db
+      DB_USERS: ${DB_USERS}
+      DB_PASSWORD: ${DB_PASSWORD}
