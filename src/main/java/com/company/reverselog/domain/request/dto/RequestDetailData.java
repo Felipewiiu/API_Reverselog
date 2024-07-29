@@ -13,9 +13,6 @@ public record RequestDetailData(
 
         byte[] nf_compra,
 
-        @NotBlank(message = "O campo descição de defeito não pode estar em branco ou nulo")
-        String descricao_defeito,
-
         LocalDateTime data,
 
         Status status,
@@ -26,7 +23,6 @@ public record RequestDetailData(
     public RequestDetailData(Solicitacao request) {
         this(
                 request.getNf_compra(),
-                request.getDescricao_defeito(),
                 request.getData(),
                 request.getStatus(),
                 request.getCliente()

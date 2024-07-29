@@ -10,10 +10,7 @@ public record RequestRegistrationData(
 
         String nf_compra,
 
-        List<QuantityProducts> produto,
-
-        @NotBlank(message = "O campo descrição de defeito não pode ser null ou vazio")
-        String descricao_defeito,
+        List<DataProducts> produto,
 
         String cliente_id
 ) {

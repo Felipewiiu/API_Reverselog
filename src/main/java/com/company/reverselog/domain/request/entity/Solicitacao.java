@@ -33,8 +33,6 @@ public class Solicitacao {
     @OneToMany(mappedBy = "solicitacao", cascade = CascadeType.ALL)
     private List<RequestProduct> requestProducts = new ArrayList<>();
 
-    private String descricao_defeito;
-
     private LocalDateTime data;
 
     private Boolean ativo = true;

@@ -31,9 +31,12 @@ public class RequestProduct {
 
     private Integer quantidade;
 
-    public RequestProduct(Solicitacao solicitacao, Produto product, int quantidade) {
+    private String descricao;
+
+    public RequestProduct(Solicitacao solicitacao, Produto product, int quantidade, String descricao) {
         this.solicitacao = solicitacao;
         this.produto = product;
         this.quantidade = quantidade;
+        this.descricao = descricao;
     }
 }

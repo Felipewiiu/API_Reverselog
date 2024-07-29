@@ -46,13 +46,12 @@ public class MakeRequest {
 
         data.produto().stream().forEach(product -> {
             var productTarget = productRepository.getReferenceById(product.id());
-            RequestProduct requestProductList = new RequestProduct(solicitacao, productTarget, product.amount());
+            RequestProduct requestProductList = new RequestProduct(solicitacao, productTarget, product.amount(), product.description());
             requestProductsRepository.save(requestProductList);
 
         });
 
         solicitacao.setNf_compra(ChangeBase64ForByte.changeBase64(data.nf_compra()));
-        solicitacao.setDescricao_defeito(data.descricao_defeito());
         solicitacao.setCliente(custumer);
         solicitacao.setData(LocalDateTime.now());
 

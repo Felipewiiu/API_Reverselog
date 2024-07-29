@@ -41,6 +41,8 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<RequestProduct> requestProduct = new ArrayList<>();
 
+    private String descricao_defeito;
+
     public Produto(DadosCadastroProdutos dados) {
         this.nome = dados.nome();
         this.modelo = dados.modelo();
