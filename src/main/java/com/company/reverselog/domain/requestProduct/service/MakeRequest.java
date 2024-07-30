@@ -51,9 +51,10 @@ public class MakeRequest {
 
         });
 
-        solicitacao.setNf_compra(ChangeBase64ForByte.changeBase64(data.nf_compra()));
+        solicitacao.setNf_RMA(ChangeBase64ForByte.changeBase64(data.nf_RMA()));
         solicitacao.setCliente(custumer);
         solicitacao.setData(LocalDateTime.now());
+        solicitacao.setNumero_nf(data.numero_nf());
 
         solicitacaoRepository.save(solicitacao);
 
@@ -66,7 +67,7 @@ public class MakeRequest {
                 solicitacao.getId(),
                 solicitacao.getCliente(),
                 solicitacao.getStatus(),
-                solicitacao.getNf_compra(),
+                solicitacao.getNf_RMA(),
                 solicitacao.getData()
         );
     }

@@ -25,7 +25,9 @@ public class Solicitacao {
 
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
-    private byte[] nf_compra;
+    private byte[] nf_RMA;
+
+    private Integer numero_nf;
 
     @JsonIgnore
     @OneToMany(mappedBy = "solicitacao", cascade = CascadeType.ALL)
@@ -41,7 +43,5 @@ public class Solicitacao {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")// nome da chave estrangeira
     private Cliente cliente;
-
-
 
 }

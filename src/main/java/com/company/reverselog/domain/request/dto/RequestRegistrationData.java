@@ -8,7 +8,12 @@ import java.util.List;
 
 public record RequestRegistrationData(
 
-        String nf_compra,
+        @NotNull(message = "O campo nf_RMA não pode ser nulo")
+        @NotBlank(message = "O campo nf_RMA não pode estar em branco")
+        String nf_RMA,
+
+        @NotNull(message = "O campo numero_nf não pode ser nulo")
+        Integer numero_nf,
 
         List<DataProducts> produto,
 

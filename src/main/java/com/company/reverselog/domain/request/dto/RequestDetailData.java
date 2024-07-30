@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public record RequestDetailData(
-
-        byte[] nf_compra,
+        @NotNull(message = "O campo numero_nf não pode ser nulo")
+        Integer numero_nf,
 
         LocalDateTime data,
 
@@ -22,7 +22,7 @@ public record RequestDetailData(
 ) {
     public RequestDetailData(Solicitacao request) {
         this(
-                request.getNf_compra(),
+                request.getNumero_nf(),
                 request.getData(),
                 request.getStatus(),
                 request.getCliente()
