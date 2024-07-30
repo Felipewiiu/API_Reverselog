@@ -1,10 +1,8 @@
 package com.company.reverselog.domain.request.entity;
 
 import com.company.reverselog.domain.custumer.entity.Cliente;
-import com.company.reverselog.domain.product.service.ChangeBase64ForByte;
-import com.company.reverselog.domain.requestProduct.entity.RequestProduct;
 import com.company.reverselog.domain.request.Status;
-import com.company.reverselog.domain.request.dto.SolicitacaoDto;
+import com.company.reverselog.domain.requestProduct.entity.RequestProduct;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;

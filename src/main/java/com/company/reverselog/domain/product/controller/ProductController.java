@@ -28,7 +28,6 @@ public class ProductController {
     @Operation(summary = "Lista todos os produtos ativos no sistema")
     public ResponseEntity<Page<DadosListagemProdutosAtivos>> listaProdutosAtivos(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
         Page<DadosListagemProdutosAtivos> products = productService.findAllProductsActive(pageable);
-
         return ResponseEntity.ok(products);
     }
 
@@ -37,14 +36,12 @@ public class ProductController {
     @Secured("ROLE_ADMIN")
     public ResponseEntity<Page<DadosListagemProdutos>> listaTodosProdutos(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
         Page<DadosListagemProdutos> pageProduct = productService.findAll(pageable);
-
         return ResponseEntity.ok(pageProduct);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoProduto> findProductByID(@PathVariable Long id){
         DadosDetalhamentoProduto product = productService.findProductById(id);
-
         return ResponseEntity.ok(product);
     }
 
@@ -54,9 +51,7 @@ public class ProductController {
     @Operation(summary = "Cadatra um produto no sistema")
     public ResponseEntity<DadosDetalhamentoProduto> cadastraProdutos(@RequestBody @Valid DadosCadastroProdutos dados, UriComponentsBuilder builder) {
         DadosDetalhamentoProduto produto = productService.saveProduct(dados);
-
         var uri = builder.path("/produtos/{id}").buildAndExpand(produto.id()).toUri();
-
         return ResponseEntity.created(uri).body(produto);
     }
 
@@ -66,7 +61,6 @@ public class ProductController {
     @Operation(summary = "Atuliza informação de um produto no sistema")
     public ResponseEntity<DadosDetalhamentoProduto> atualizaProdudos(@RequestBody @Valid DadosAtualizacaoProduto dados) {
         DadosDetalhamentoProduto productUpdated = productService.updateProduct(dados);
-
         return ResponseEntity.ok(productUpdated);
     }
 
@@ -76,7 +70,6 @@ public class ProductController {
     @Operation(summary = "Inativa um cliente no sistema")
     public ResponseEntity<Void> deletaProduto(@PathVariable Long id) {
         productService.deleteProduct(id);
-
         return ResponseEntity.noContent().build();
     }
 }

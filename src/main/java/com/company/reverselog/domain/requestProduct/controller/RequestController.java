@@ -32,7 +32,6 @@ public class RequestController {
     @Operation(summary = "Recupera todas as solicitações de ordem de serviço do sistema")
     public ResponseEntity<Page<DataListRequestDto>> findAllRequests(@PageableDefault(size = 10, sort = {"id"}) Pageable pageable) {
         Page<DataListRequestDto> dataListRequestDto = makeRequestService.findAllRequest(pageable);
-
         return ResponseEntity.ok(dataListRequestDto);
 
     }
@@ -42,7 +41,6 @@ public class RequestController {
     @Operation(summary = "Cria uma solicitação de ordem de serviço no sistema")
     public ResponseEntity<RequestDetailData> registrationRequest(@RequestBody @Valid RequestRegistrationData request, UriComponentsBuilder uriBuilder) {
         RequestDetailData dto = makeRequestService.saveRequest(request);
-
         var uri = uriBuilder.path("/solicitacao/{id}").buildAndExpand(dto.cliente().getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
