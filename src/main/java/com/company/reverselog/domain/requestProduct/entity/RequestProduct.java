@@ -33,10 +33,10 @@ public class RequestProduct {
 
     private String descricao;
 
-    public RequestProduct(Solicitacao solicitacao, Produto product, int quantidade, String descricao) {
-        this.solicitacao = solicitacao;
+    public RequestProduct(Solicitacao request, Produto product, int amount, String description) {
+        this.solicitacao = request;
         this.produto = product;
-        this.quantidade = quantidade;
-        this.descricao = descricao;
+        this.quantidade = amount;
+        this.descricao = description;
     }
 }

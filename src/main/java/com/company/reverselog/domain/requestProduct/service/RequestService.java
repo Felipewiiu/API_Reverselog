@@ -4,6 +4,7 @@ import com.company.reverselog.domain.custumer.entity.Cliente;
 import com.company.reverselog.domain.custumer.repository.ClienteRepository;
 import com.company.reverselog.domain.product.repository.ProdutoRepository;
 import com.company.reverselog.domain.product.service.ChangeBase64ForByte;
+import com.company.reverselog.domain.requestProduct.dto.RequestByCostumerEmailDto;
 import com.company.reverselog.domain.requestProduct.entity.RequestProduct;
 import com.company.reverselog.domain.requestProduct.repository.RequestProductsRepository;
 import com.company.reverselog.domain.request.dto.RequestDetailData;
@@ -21,7 +22,7 @@ import java.time.LocalDateTime;
 
 @Service
 @Transactional
-public class MakeRequest {
+public class RequestService {
     @Autowired
     private ProdutoRepository productRepository;
     @Autowired
@@ -62,6 +63,11 @@ public class MakeRequest {
 
     }
 
+//    public Page<RequestByCostumerEmailDto> findRequesActivetByEmail(String email, Pageable pageable) {
+//        Page<RequestProduct> requestProducts = requestProductsRepository.findAllBySolicitacao(email);
+//        // precisa criar a lógica de consulta
+//    }
+
     private DataListRequestDto toDTO(Solicitacao solicitacao) {
         return new DataListRequestDto(
                 solicitacao.getId(),
@@ -71,5 +77,6 @@ public class MakeRequest {
                 solicitacao.getData()
         );
     }
+
 
 }
