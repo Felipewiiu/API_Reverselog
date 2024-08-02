@@ -12,6 +12,8 @@ import com.company.reverselog.domain.request.dto.RequestRegistrationData;
 import com.company.reverselog.domain.request.entity.Solicitacao;
 import com.company.reverselog.domain.request.repository.SolicitacaoRepository;
 import com.company.reverselog.domain.requestProduct.dto.DataListRequestDto;
+import com.company.reverselog.exception.exception.ControllerNotFoundExeption;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -63,10 +68,17 @@ public class RequestService {
 
     }
 
-//    public Page<RequestByCostumerEmailDto> findRequesActivetByEmail(String email, Pageable pageable) {
-//        Page<RequestProduct> requestProducts = requestProductsRepository.findAllBySolicitacao(email);
-//        // precisa criar a lógica de consulta
-//    }
+    public Page<RequestByCostumerEmailDto> findRequesActivetByEmail(String email, Pageable pageable) {
+        Cliente costumer = clienteRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontado para o email: " + email));
+
+       Page<Solicitacao> request = solicitacaoRepository.findByClienteId(costumer.getId(), pageable);
+
+       Page<RequestByCostumerEmailDto> dtoPage = request.map(this::convertToDto);
+
+       return dtoPage;
+
+    }
 
     private DataListRequestDto toDTO(Solicitacao solicitacao) {
         return new DataListRequestDto(
@@ -78,5 +90,13 @@ public class RequestService {
         );
     }
 
-
+    private RequestByCostumerEmailDto convertToDto(Solicitacao solicitacao) {
+        return new RequestByCostumerEmailDto(
+                solicitacao.getNf_RMA(),
+                solicitacao.getNumero_nf(),
+                solicitacao.getRequestProducts(),
+                solicitacao.getData(),
+                solicitacao.getStatus()
+        );
+    }
 }

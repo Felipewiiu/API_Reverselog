@@ -31,7 +31,7 @@ public class Solicitacao {
 
     @JsonIgnore
     @OneToMany(mappedBy = "solicitacao", cascade = CascadeType.ALL)
-    private List<RequestProduct> requestProducts = new ArrayList<>();
+    private List<RequestProduct> requestProducts = new ArrayList<RequestProduct>();
 
     private LocalDateTime data;
 

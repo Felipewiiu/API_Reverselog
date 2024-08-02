@@ -40,8 +40,9 @@ public class ControllerExeptionHandler {
         return ResponseEntity.status(status).body(error);
     }
 
+    @ExceptionHandler(ControllerNotFoundExeption.class)
     public ResponseEntity<StandardError> EntityNotFold(ControllerNotFoundExeption e, HttpServletRequest request){
-        HttpStatus status = HttpStatus.MULTI_STATUS;
+        HttpStatus status = HttpStatus.NOT_FOUND;
 
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());

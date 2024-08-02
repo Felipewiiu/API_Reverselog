@@ -38,11 +38,11 @@ public class RequestController {
 
     }
 
-//    @GetMapping("/cliente")
-//    public ResponseEntity<Page<RequestByCostumerEmailDto>> findRequesActivetByEmail( @RequestParam("email") String email, Pageable pageable) {
-//        Page<RequestByCostumerEmailDto> listRequest = RequestService.findRequesActivetByEmail(email, pageable);
-//        return ResponseEntity.ok(listRequest);
-//    }
+    @GetMapping("/cliente")
+    public ResponseEntity<Page<RequestByCostumerEmailDto>> findRequesActivetByEmail( @RequestParam("email") String email, Pageable pageable) {
+        Page<RequestByCostumerEmailDto> listRequest = RequestService.findRequesActivetByEmail(email, pageable);
+        return ResponseEntity.ok(listRequest);
+    }
 
     @PostMapping
     @Transactional
