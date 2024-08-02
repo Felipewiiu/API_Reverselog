@@ -15,4 +15,13 @@ public record RequestByCostumerEmailDto(
         Status status
 
 ) {
+    public RequestByCostumerEmailDto(Solicitacao solicitacao) {
+        this (
+                solicitacao.getNf_RMA(),
+                solicitacao.getNumero_nf(),
+                solicitacao.getRequestProducts(),
+                solicitacao.getData(),
+                solicitacao.getStatus()
+        );
+    }
 }

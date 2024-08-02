@@ -75,9 +75,7 @@ public class RequestService {
        Page<Solicitacao> request = solicitacaoRepository.findByClienteId(costumer.getId(), pageable);
 
        Page<RequestByCostumerEmailDto> dtoPage = request.map(this::convertToDto);
-
        return dtoPage;
-
     }
 
     private DataListRequestDto toDTO(Solicitacao solicitacao) {
@@ -91,12 +89,6 @@ public class RequestService {
     }
 
     private RequestByCostumerEmailDto convertToDto(Solicitacao solicitacao) {
-        return new RequestByCostumerEmailDto(
-                solicitacao.getNf_RMA(),
-                solicitacao.getNumero_nf(),
-                solicitacao.getRequestProducts(),
-                solicitacao.getData(),
-                solicitacao.getStatus()
-        );
+        return new RequestByCostumerEmailDto(solicitacao);
     }
 }

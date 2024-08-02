@@ -11,7 +11,6 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @AllArgsConstructor
 @EqualsAndHashCode(of = "{id}")
 public class RequestProduct {

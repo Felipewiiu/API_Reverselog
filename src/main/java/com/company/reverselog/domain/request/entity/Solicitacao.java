@@ -30,8 +30,8 @@ public class Solicitacao {
     private Integer numero_nf;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "solicitacao", cascade = CascadeType.ALL)
-    private List<RequestProduct> requestProducts = new ArrayList<RequestProduct>();
+    @OneToMany(mappedBy = "solicitacao", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<RequestProduct> requestProducts = new ArrayList<>();
 
     private LocalDateTime data;
 
