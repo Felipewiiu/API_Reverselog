@@ -24,7 +24,7 @@ public class RequestProduct {
     @JoinColumn(name = "id_solicitacao_PK")
     private Solicitacao solicitacao;
 
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_produto_PK")
     private Produto produto;

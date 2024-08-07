@@ -6,6 +6,7 @@ import com.company.reverselog.domain.requestProduct.entity.RequestProduct;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public record RequestByCostumerEmailDto(
         byte[] nf_RMA,
@@ -19,7 +20,9 @@ public record RequestByCostumerEmailDto(
         this (
                 solicitacao.getNf_RMA(),
                 solicitacao.getNumero_nf(),
-                solicitacao.getRequestProducts(),
+                solicitacao.getRequestProducts().stream()
+                        .map(ProductListDTO::new) // Converte cada RequestProduct em ProductListDTO
+                        .collect(Collectors.toList()),
                 solicitacao.getData(),
                 solicitacao.getStatus()
         );

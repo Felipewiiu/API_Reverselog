@@ -6,16 +6,16 @@ import com.company.reverselog.domain.requestProduct.entity.RequestProduct;
 
 public record ProductListDTO(
         Long id_requestProducts,
-        Solicitacao solicitacao,
-        Produto produto,
+        Long solicitacao,
+        String produto,
         Integer quantidade,
         String descricao
 ) {
     public ProductListDTO(RequestProduct requestProduct) {
         this(
                 requestProduct.getId_requestProducts(),
-                requestProduct.getSolicitacao(),
-                requestProduct.getProduto(),
+                requestProduct.getSolicitacao().getId().longValue(),
+                requestProduct.getProduto().getNome(),
                 requestProduct.getQuantidade(),
                 requestProduct.getDescricao()
 

@@ -70,7 +70,6 @@ public class RequestService {
 
     public Page<RequestByCostumerEmailDto> findRequesActivetByEmail(String email, Pageable pageable) {
 
-
        Page<Solicitacao> request = solicitacaoRepository.findByEmail(email, pageable);
 
        Page<RequestByCostumerEmailDto> dtoPage = request.map(this::convertToDto);
