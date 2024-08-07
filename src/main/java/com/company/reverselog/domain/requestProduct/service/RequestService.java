@@ -69,10 +69,9 @@ public class RequestService {
     }
 
     public Page<RequestByCostumerEmailDto> findRequesActivetByEmail(String email, Pageable pageable) {
-        Cliente costumer = clienteRepository.findByEmail(email)
-                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontado para o email: " + email));
 
-       Page<Solicitacao> request = solicitacaoRepository.findByClienteId(costumer.getId(), pageable);
+
+       Page<Solicitacao> request = solicitacaoRepository.findByEmail(email, pageable);
 
        Page<RequestByCostumerEmailDto> dtoPage = request.map(this::convertToDto);
        return dtoPage;

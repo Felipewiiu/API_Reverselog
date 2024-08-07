@@ -10,7 +10,7 @@ import java.util.List;
 public record RequestByCostumerEmailDto(
         byte[] nf_RMA,
         Integer numero_nf,
-        List<RequestProduct> requestProductList,
+        List<ProductListDTO> requestProductList,
         LocalDateTime data,
         Status status
 
