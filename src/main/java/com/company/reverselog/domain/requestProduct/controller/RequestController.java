@@ -39,6 +39,8 @@ public class RequestController {
     }
 
     @GetMapping("/cliente")
+    @Operation(summary = "Busca requisições por emails de usuários")
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<Page<RequestByCostumerEmailDto>> findRequesActivetByEmail( @RequestParam("email") String email, Pageable pageable) {
         Page<RequestByCostumerEmailDto> listRequest = RequestService.findRequesActivetByEmail(email, pageable);
         return ResponseEntity.ok(listRequest);

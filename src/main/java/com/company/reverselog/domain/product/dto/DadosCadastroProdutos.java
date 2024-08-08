@@ -12,7 +12,6 @@ public record DadosCadastroProdutos(
         String modelo,
 
         @NotNull(message = "O campo ncm não pode estar em branco ")
-        @Pattern(regexp = "\\d{8}", message = "O campo ncm deve conter 8 caracteres numéricos")
         Integer ncm,
 
         @NotNull(message = "O campo image não pode estar nulo ou em branco")

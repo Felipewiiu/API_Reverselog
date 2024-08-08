@@ -40,6 +40,8 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Busca produtos por id")
+
     public ResponseEntity<DadosDetalhamentoProduto> findProductByID(@PathVariable Long id){
         DadosDetalhamentoProduto product = productService.findProductById(id);
         return ResponseEntity.ok(product);
@@ -58,7 +60,7 @@ public class ProductController {
     @PutMapping
     @Transactional
     @Secured("ROLE_ADMIN")
-    @Operation(summary = "Atuliza informação de um produto no sistema")
+    @Operation(summary = "Atualiza informação de um produto no sistema")
     public ResponseEntity<DadosDetalhamentoProduto> atualizaProdudos(@RequestBody @Valid DadosAtualizacaoProduto dados) {
         DadosDetalhamentoProduto productUpdated = productService.updateProduct(dados);
         return ResponseEntity.ok(productUpdated);
